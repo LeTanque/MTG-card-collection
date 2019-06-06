@@ -1,0 +1,68 @@
+// Colors
+$clear-color: rgba(255,255,255,0.15);
+$white: #ffffff;
+$light: #dddddd;
+$light-gray: rgba(55,55,55,0.5);
+$gray: #999999;
+$dark: #1a1a1a;
+$black: #000000;
+$orange: #C55E45;
+$red: #dd1111;
+$dark-red: #a00000;
+$blue: #255E9A;
+$green: #38c46d;
+$teal: rgba(80, 201, 195, 1.0);
+$light-bronze: #ada996;
+$lighter-gray: #dbdbdb;
+$gray-white:#eaeaea;
+
+// Bootstrappy colors
+$primary: #008641;
+$secondary: #86cb92;
+$tertiary: #6db790;
+$danger: #963030;
+$success: #0597A7;
+$info: #643173;
+$warning: #2f7bc6;
+$sale: #f52859;
+
+
+// Color pointers
+$nav-bg: $dark;
+$nav-font: $white;
+$nav-border: $black;
+
+$header-font-color: $dark;
+$header-bg-color: $white;
+$main-font-color: $dark;
+$bg-color: $white;
+
+$footer-background: $dark;
+$footer-font-color: $white;
+
+$button-bg-color: $primary;
+$border-real: $dark;
+
+$links: $white;
+
+
+// CSS Color definitions
+.cltgray, .clight { color: $light-gray; }
+.cgray, .cgrey { color: $gray; }
+.cred { color: $red; }
+.cblack { color: $black; }
+.cdark { color: $dark; }
+.clight { color: $light; }
+.cwhite { color: $white; }
+.corange { color: $orange; }
+.cblue { color: $blue; }
+
+.cprimary { color: $primary; }
+.csecondary { color: $secondary; }
+.ctertiary { color: $tertiary; }
+.cdanger { color: $danger; }
+.csuccess { color: $success; }
+.cinfo { color: $info; }
+.cwarning { color: $warning; }
+.csale { color: $sale; }
+

@@ -1,0 +1,17 @@
+
+.hero-container div {
+    // background-size: 100%;
+    // background-position-y: -10vh;
+    z-index: 0;
+}
+.hero-logo {
+    width: 40vw;
+    position: relative;
+    bottom: 10vh;
+    @include phone {
+        width: 50vw;
+    }
+    @include phone-small {
+        width: 85vw;
+    }
+}

@@ -1,0 +1,30 @@
+
+audio, canvas, img, video {
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.background-video--page {
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    transition: opacity .2s ease;
+    will-change: opacity;
+    .background-video {
+        bottom: 0;
+        height: 100vh;
+        left: 50%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 100vw;
+        z-index: -5;
+    }
+}

@@ -1,0 +1,18 @@
+// Breakpoints
+@mixin phone-small() {
+    @media only screen and (min-width: 0px) and (max-width: 350px) {
+        @content;
+    }
+}
+
+@mixin phone() {
+    @media only screen and (min-width: 0px) and (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin medium() {
+    @media only screen and (min-width: 601px) and (max-width: 820px) {
+        @content;
+    }
+}

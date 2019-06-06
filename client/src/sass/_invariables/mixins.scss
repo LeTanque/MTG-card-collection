@@ -1,0 +1,97 @@
+// Gradients 
+@mixin bg-gradient2($bg-gradient-direction, $bg-gradient-a, $bg-gradient-b) {
+  background: linear-gradient($bg-gradient-direction, $bg-gradient-a, $bg-gradient-b);
+};
+@mixin bg-gradient3($bg-gradient-direction, $bg-gradient-a, $bg-gradient-b, $bg-gradient-c) {
+  background: linear-gradient($bg-gradient-direction, $bg-gradient-a, $bg-gradient-b, $bg-gradient-c);
+};
+
+
+// Transition duration
+@mixin transition($duration: 0.75s) {
+  -webkit-transition-duration: $duration;
+  -moz-transition-duration: $duration;
+  transition-duration: $duration;
+}
+
+
+// Border
+@mixin border-radius($tl: 3px, $tr: $tl, $bl: 3px, $br: $bl) {
+  border-radius: $tl $tr $bl $br;
+}
+@mixin border-left-style($border-style-width: 5px, $border-style-color: $luncher-saddle) {
+  border-left: $border-style-width solid $border-style-color;
+  padding-right: $border-style-width * 2;
+}
+@mixin border-style($border-style-width: 5px, $border-style: solid, $border-style-color: $luncher-saddle) {
+  border: $border-style-width $border-style $border-style-color;
+}
+
+// Horizontal RuLeZ
+@mixin hr-style($hr-margin:20px auto 30px auto, $hr-border-style:1px solid $light-gray) {
+  margin: $hr-margin;
+  border: $hr-border-style;
+}
+
+
+
+// Links
+@mixin link($link-fg-color, $link-bg-color, $link-bold: 600) {
+  color: $link-fg-color;
+  background-color: unset;
+  font-weight: $link-bold;
+  text-decoration: none;
+  &:hover {
+    color: $link-bg-color;
+    background-color: $link-fg-color;
+    font-weight: $link-bold;
+    @include border-radius(10px, 10px, 0, 0);
+    @include transition(0.75s);
+    @include phone {
+      @include border-radius(5px, 5px, 0, 0);
+    }
+    @include phone-small {
+      @include border-radius(0, 0, 0, 0);
+      letter-spacing: 0.75rem;
+    }
+  }
+}
+a { 
+  color: $links;
+  text-decoration: none;
+  &:hover {
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.85);
+    @include transition;
+  }
+}
+
+// Positioning
+@mixin sticky-top($top-pos) {
+  position: sticky;
+  top: $top-pos;
+}
+
+
+// Shadows
+@mixin font-shadow($font-shadow-x: 1px, $font-shadow-y: 1px, $font-shadow-blur: 5px, $font-shadow-color: $black) {
+  text-shadow: $font-shadow-x $font-shadow-y $font-shadow-blur $font-shadow-color;
+}
+@mixin box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 1px, $box-shadow-color: $dark) {
+  box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $box-shadow-spread $box-shadow-color;
+}
+@mixin material-shadow($spread: 6px) {
+  box-shadow: 0 3px $spread rgba(26, 26, 26, 0.3), 0 3px $spread rgba(51, 51, 51, 0.45);
+}
+
+// Dynamic styling
+.completed {
+  text-decoration-line: line-through;
+  font-style: italic;
+  color: $light-gray;
+}
+
+.display-none { 
+  display: none; 
+  @include transition(0.75s) 
+}
+

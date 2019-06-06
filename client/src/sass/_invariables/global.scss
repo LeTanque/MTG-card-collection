@@ -1,0 +1,44 @@
+// Global
+* { box-sizing: border-box; }
+
+// Hiding overflow early on the development process could result in bad code and hard to 
+// identify problems later on down the road. So we don't enable it until/if we need to.
+// html { overflow-x: hidden; } 
+
+html { font-size: 62.5%;  scroll-behavior: smooth;  }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+
+hr { 
+  width: calc(100% - 20px);
+  margin: 20px auto;
+  border-top: 1px solid #f2f2f2; // @light
+}
+
+.container-basic {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;  
+}
+
+.centered {
+  float: none;
+  margin: 0 auto;
+}
+  
+.display-none { display: none; }
+
+.container { 
+  max-width: 700px; 
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+
+
+

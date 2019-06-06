@@ -1,0 +1,17 @@
+.tagline-banner {
+    background-color: $dark;
+    color: $light;
+    @include box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 1px, $box-shadow-color: $dark);
+    .tagline {
+        color: $primary;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 15px;
+        margin-left: 15px;
+        position: relative;
+        top: -5vh;
+        @include phone {
+            top: -3vh;
+        }
+    }
+}

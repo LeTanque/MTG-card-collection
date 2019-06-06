@@ -1,0 +1,128 @@
+// Fonts
+// @import url(https://fonts.googleapis.com/css?family=Barlow+Condensed:400,900|Patua+One);
+@import url(https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,400i,700,700i|Fanwood+Text:400,400i);
+
+@mixin font-logo {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+    // text-transform: uppercase;
+    // letter-spacing: 5px;
+}
+
+@mixin font-title($weight: 700) {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: $weight;
+    line-height: 1;
+}
+
+@mixin font-body($weight: 400) {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: $weight;
+    line-height: 1;
+}
+
+@mixin font-handwritten($weight: 400) {
+    font-family: 'Fanwood Text', serif;
+    font-weight: $weight;
+    font-style: italic;
+    line-height: 1.1;
+}
+
+h1, .h1 { 
+    font-size: 4.2rem; 
+    @include font-logo; 
+}
+h2, .h2 { 
+    font-size: 3.2rem; 
+    @include font-title;
+}
+h3, .h3 { 
+    font-size: 3.0rem; 
+    @include font-title;
+}
+h4, .h4 { 
+    font-size: 2.2rem; 
+    @include font-title;
+}
+h5, .h5 { 
+    font-size: 2.0rem; 
+    @include font-title;
+}
+h6, .h6 { 
+    font-size: 1.4rem; 
+    @include font-title;
+}
+
+body { 
+    font-size: 1.6rem;
+    @include font-body; 
+}
+
+li { 
+    font-size: 1.4rem; 
+}
+
+p {
+    font-size: 1.6rem;
+    line-height: 1.4;
+}
+
+.italic { 
+    font-style: italic;
+}
+strong { 
+    font-weight: bolder; 
+}
+code { 
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; 
+}
+
+.fa-sm {
+	font-size: 0.75em;
+}
+
+.fa-lg {
+	font-size: 1.33333333em;
+	line-height: 0.75em;
+	vertical-align: -15%;
+}
+
+.fa-xl {
+	font-size: 1.75em;
+	line-height: 0.75em;
+	vertical-align: -15%;
+}
+
+.fa-2x {
+	font-size: 2em;
+}
+
+.fa-3x {
+	font-size: 3em;
+}
+
+.fa-4x {
+	font-size: 4em;
+}
+
+.fa-5x {
+	font-size: 5em;
+}
+
+.fa-6x {
+	font-size: 6em;
+}
+
+.fa-7x {
+	font-size: 7em;
+}
+
+.fa-8x {
+	font-size: 8em;
+}
+
+.fa-9x {
+	font-size: 9em;
+}

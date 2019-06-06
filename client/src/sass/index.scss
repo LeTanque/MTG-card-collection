@@ -1,0 +1,29 @@
+// Reset
+@import './_invariables/reset.scss';
+
+// Fonts and icons
+@import './_fonts/fa.css';
+@import './_fonts/icomoon.css';
+@import './_fonts/fonts.scss';
+
+//
+@import './_invariables/breakpoints.scss';
+@import './_invariables/colors.scss';
+@import './_invariables/forms.scss';
+@import './_invariables/buttons.scss';
+
+//
+@import './_invariables/global.scss';
+@import './_invariables/mixins.scss';
+
+// Page styles
+@import 'App.scss';
+
+@import './Home/Home.scss';
+@import './Home/Hero.scss';
+@import './Home/WaveyBanner.scss';
+@import './Home/TaglineBanner.scss';
+
+@import './NavFooter/Nav.scss';
+
+@import './Cards/CardsContainer.scss';

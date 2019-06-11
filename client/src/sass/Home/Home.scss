@@ -1,0 +1,34 @@
+
+
+
+.home-container {
+    height: calc(100vh - 72px);
+    width: 100vw;
+
+    .home {
+        background-attachment: fixed;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        filter: contrast(46%) brightness(28%) blur(1.25px) grayscale(77%);
+        transform: rotate(-15deg) scale(1.75);
+    }
+
+    .home-button-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        button {
+            margin: 0 0 20px 0;
+        }
+    }
+}
+
+body {
+    // overflow: hidden;
+}
+
+

@@ -1,0 +1,18 @@
+
+body {
+    background-color: $dark;
+    color: $white;
+}
+
+.loader {
+    color: $light;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 25vh;
+    code {
+        padding: 20px 0;
+    }
+}

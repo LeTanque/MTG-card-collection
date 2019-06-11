@@ -1,28 +1,18 @@
+
 nav {
     display: flex;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     align-items: center;    
-    background-color: $dark;
+    background-color: $black;
     width: 100%;
-    padding: 15px;
-    position: relative;
+    padding: 20px;
     z-index: 100;
-    @include material-shadow($spread: 2px);
+    @include box-shadow($box-shadow-x: 0px, $box-shadow-y: 3px, $box-shadow-blur: 9px, $box-shadow-spread: 0px, $box-shadow-color: $black);
     .nav-logo {
         color: $white;
-    }
-    .nav-social-links {
-        ul {
-            display: flex;
-            margin-right: 10px;
-            li {
-                margin: 0 0 0 15px;
-                font-size: 2rem;
-                .icon-weedmaps {
-                    font-size: 2.2rem;
-                }
-            }
-        }
+        @include font-logo; 
     }
 }
 
@@ -34,7 +24,7 @@ nav {
     padding: 6px 0 3px 0;
     position: relative;
     z-index: 99;
-    @include material-shadow($spread: 6px);
+    @include box-shadow($box-shadow-x: 0px, $box-shadow-y: 3px, $box-shadow-blur: 9px, $box-shadow-spread: 0px, $box-shadow-color: $black);
     ul {
         display: flex;
         justify-content: center;
@@ -44,3 +34,4 @@ nav {
         }
     }
 }
+

@@ -76,7 +76,7 @@ a {
 @mixin font-shadow($font-shadow-x: 1px, $font-shadow-y: 1px, $font-shadow-blur: 5px, $font-shadow-color: $black) {
   text-shadow: $font-shadow-x $font-shadow-y $font-shadow-blur $font-shadow-color;
 }
-@mixin box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 1px, $box-shadow-color: $dark) {
+@mixin box-shadow($box-shadow-x: 0px, $box-shadow-y: 3px, $box-shadow-blur: 3px, $box-shadow-spread: 3px, $box-shadow-color: $dark) {
   box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $box-shadow-spread $box-shadow-color;
 }
 @mixin material-shadow($spread: 6px) {

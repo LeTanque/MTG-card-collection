@@ -35,6 +35,7 @@ class CardSearch extends Component {
         return (
             <>
             <section className="search-bar">
+                <h3>Under Construction!</h3>
                 <button 
                     className="btn-dark"
                     onClick={ this.findCardByName() }

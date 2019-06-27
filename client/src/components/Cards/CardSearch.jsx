@@ -1,56 +1,98 @@
 import React, { Component } from 'react';
 import mtg from 'mtgsdk';
-
+import Card from './Card.jsx';
 
 
 class CardSearch extends Component {
     state = {
+        cardSearchResults:[],
         cardName:'',
         cardImage:'',
-        inputCardName:'Swamp'
+        searchResultPlaceholder:'Search for cards',
+        inputCardName:''
     }
 
-
-    findCardByName = () => {
+    findCardByName = cardName => {
         mtg.card
         .where({
-            name: `${this.state.inputCardName}`, 
+            name: cardName, 
             // language: 'english'
         })
         .then(results => {
             console.log("These are the findCardByName results", results);
-            this.setState({
-                cardName:results[0].name,
-                cardImage:results[0].imageUrl,
-            })
+            if(results.length === 0) {
+                this.setState({
+                    inputCardName:'',
+                    searchResultPlaceholder:'No results!'
+                })
+            }
+            else {
+                this.setState({
+                    cardSearchResults:results,
+                    // cardName:results[0].name,
+                    // cardImage:results[0].imageUrl,
+                    searchResultPlaceholder:'',
+                    inputCardName:''
+                })
+            }
         })
     }
-    
-    componentDidUpdate() {
-        
+
+    handleChanges = event => {
+        this.setState({
+            [event.target.name]:event.target.value
+        })
+    }
+
+    submitSearch = event => {
+        event.preventDefault();
+        this.findCardByName(this.state.inputCardName);
     }
 
     render() {
 
         return (
             <>
-            <section className="search-bar">
-                <h3>Under Construction!</h3>
-                <button 
-                    className="btn-dark"
-                    onClick={ this.findCardByName() }
-                >
-                    Activate Search
-                </button>
+                {/* <h5>Search for MTG cards by name</h5> */}
+                
+                <section className="search-form">
+                    <form 
+                    onSubmit={this.submitSearch}
+                    >
+                        <input 
+                        type="text"
+                        name="inputCardName"
+                        placeholder="Input card name here"
+                        onChange={this.handleChanges}
+                        value={this.state.inputCardName}
+                        />
+                    </form>
+                </section>
 
-            </section>
-            <section className="cards-container">
+                <section className="cards-container">
 
-                <div className="card">
-                    <img src={this.state.cardImage} alt={this.state.cardName} /> 
-                </div>
+                    {this.state.cardSearchResults.map(card => {
+                        if(card.imageUrl) {
+                            return (
+                                <div 
+                                key={card.multiverseid}
+                                className="card"
+                                >       
+                                    <Card 
+                                    card={card} 
+                                    />
+                                </div>
+                            )
+                        }
+                        return (
+                            <React.Fragment key={Math.random()}/>
+                        )
+                    }
+                    )}
 
-            </section>
+                    <div className="card-search-placeholder">{this.state.searchResultPlaceholder}</div>
+
+                </section>
             </>
         );
     }

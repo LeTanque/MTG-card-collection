@@ -19,7 +19,7 @@ function getRandomNumber(min, max) {
 class App extends Component {
   state = {
     baseURL:`https://api.magicthegathering.io/v1/sets/rna/booster`,
-    // baseURL:`https://api.magicthegathering.io/v1/cards?page=50&pageSize=50`,
+    // baseURL:`https://api.magicthegathering.io/v1/cards?page=1&pageSize=50`,
     cardsURL:`/cards?page=`,
     cardsPageNumber:`1`,
     randomCardUrl:`https://api.magicthegathering.io/v1/cards/${getRandomNumber(1, 1000)}`,

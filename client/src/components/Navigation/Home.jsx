@@ -21,6 +21,10 @@ class Home extends Component {
             })
         }
     }
+
+    componentDidMount() {
+        
+    }
     
     render() {
         const bgCard = {
@@ -30,11 +34,6 @@ class Home extends Component {
             backgroundSize: `${this.state.bgSize}%`,
             backgroundPositionX: `${this.state.cursorX}px`,
         };
-
-
-        // console.log("Home.jsx props", this.props);
-        // console.log("state cursor X", this.state.cursorX)
-
 
         if (!this.props.randomCardImageUrl) {
             return (
@@ -51,12 +50,10 @@ class Home extends Component {
             return (
                 <>
                     <section className="home-container"  >
-    
-                        <div className="home" style={bgCard}>
-                        </div>
+
+                        <div className="home" style={bgCard}></div>
                         
                         <div className="home-button-container">
-
 
                             <Link to={{
                                 pathname:'/cardsearch'
@@ -66,7 +63,6 @@ class Home extends Component {
                                 </button>
                             </Link>
 
-
                             <Link to={{
                                 pathname:'/randomcard'
                                 }}>
@@ -74,8 +70,7 @@ class Home extends Component {
                                     Random Card
                                 </button>
                             </Link>
-    
-    
+        
                             <Link to={{
                                 pathname:'/allcards'
                                 }}>
@@ -84,9 +79,8 @@ class Home extends Component {
                                 </button>
                             </Link>
     
-    
                         </div>
-    
+
                     </section>
                 </>
             );

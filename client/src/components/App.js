@@ -5,7 +5,7 @@ import Home from './Navigation/Home.jsx';
 import NavBar from './Navigation/NavBar.jsx';
 import RandomCard from './Cards/RandomCard.jsx';
 import CardSearch from './Cards/CardSearch.jsx';
-import CardsContainer from './Cards/CardsContainer.jsx';
+import RandomPack from './Cards/RandomPack.jsx';
 
 
 
@@ -18,28 +18,36 @@ function getRandomNumber(min, max) {
 
 class App extends Component {
   state = {
-    baseURL:`https://api.magicthegathering.io/v1/sets/rna/booster`,
     // baseURL:`https://api.magicthegathering.io/v1/cards?page=1&pageSize=50`,
     cardsURL:`/cards?page=`,
     cardsPageNumber:`1`,
+    randomPackUrlRNA:`https://api.magicthegathering.io/v1/sets/rna/booster`,
     randomCardUrl:`https://api.magicthegathering.io/v1/cards/${getRandomNumber(1, 1000)}`,
     randomCard:{},
-    sampleCard:{"name":"Plains",cmc:0,colors:[], colorIdentity:["white"], type:"Basic Land — Plains",imageUrl:"http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=8374&type=card" },
-    allCards:[],
+    sampleCard:{
+      "name":"Plains",
+      cmc:0,
+      colors:[], 
+      colorIdentity:["white"], 
+      type:"Basic Land — Plains",
+      imageUrl:"http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=8374&type=card" 
+    },
+    allCards:null,
     location:`rna`
   }
 
 
   componentDidMount() {
-    // this.getCards(this.state.baseURL + this.state.cardsURL + this.state.cardsPageNumber);
-    this.getCards(this.state.baseURL);
     this.getCard(this.state.randomCardUrl);
+
+    // this.getCards(this.state.baseURL + this.state.cardsURL + this.state.cardsPageNumber);
     // console.log(this.state.randomCardUrl)
     // this.getCardsSDK()
   }
 
 
-  getCards = URL => {
+  // This method retrieves a random pack of cards
+  getPackOfCards = URL => {
     // At a high level we are calling an API to fetch some mtg card data.
     // We then take that data and set it to our state.
     fetch(URL)
@@ -56,6 +64,11 @@ class App extends Component {
       throw new Error(err);
     });
   };
+
+  // This method triggers the above method when we click on the open pack button
+  openPackOfCards = () => {
+    this.getPackOfCards(this.state.randomPackUrlRNA);
+  }
 
 
   getCard = URL => {
@@ -132,11 +145,12 @@ class App extends Component {
 
 
         <Route 
-          path='/allcards'
+          path='/random-pack-rna'
           render={() => (
-            <CardsContainer 
+            <RandomPack 
               allCards={this.state.allCards} 
-              getCardsSDK={this.getCardsSDK}
+              openPackOfCards={this.openPackOfCards}
+              // getCardsSDK={this.getCardsSDK}
               // goToNextPage={this.goToNextPage}
             />
           )}
@@ -144,7 +158,7 @@ class App extends Component {
 
 
         <Route 
-          path='/randomcard'
+          path='/random-card'
           render={() => (
             <RandomCard 
               randomCard={this.state.randomCard}
@@ -153,7 +167,7 @@ class App extends Component {
         />
 
         <Route 
-          path='/cardsearch'
+          path='/card-search'
           render={() => (
             <CardSearch 
 

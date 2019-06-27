@@ -5,25 +5,35 @@ import Loader from 'react-loader-spinner';
 
 
 
+
 class Home extends Component {
     state = {
         bgSize:"",
         cursorX:"",
-        cursorY:""
+        cursorY:"",
+        visited: false
     }
     
-    componentDidUpdate() { 
-        let bgMovement = document.querySelector('.home');
-        if (bgMovement) {
-            bgMovement.addEventListener('mousemove', event => {
-                bgMovement.style.backgroundPositionX= `${-event.offsetX}px`;
-                bgMovement.style.backgroundPositionY= `${-event.offsetY}px`;
-            })
+    componentDidUpdate(prevProps, prevState) {
+        // console.log("previous Props", prevProps)
+        // console.log("Props", this.props)
+        // console.log("previous State", prevState)
+        // console.log("State", this.state)
+        if(prevProps !== this.props || this.state.visited === true){
+            let bgMovement = document.querySelector('.home');
+            if (bgMovement) {
+                bgMovement.addEventListener('mousemove', event => {
+                    bgMovement.style.backgroundPositionX= `${-event.offsetX}px`;
+                    bgMovement.style.backgroundPositionY= `${-event.offsetY}px`;
+                })
+            }
         }
     }
 
     componentDidMount() {
-        
+        this.setState({
+            visited: true
+        })
     }
     
     render() {
@@ -31,8 +41,8 @@ class Home extends Component {
             WebkitTransition: 'all', // note the capital 'W' here
             msTransition: 'all', // 'ms' is the only lowercase vendor prefix
             backgroundImage: 'url(' + this.props.randomCardImageUrl + ')',
-            backgroundSize: `${this.state.bgSize}%`,
-            backgroundPositionX: `${this.state.cursorX}px`,
+            // backgroundSize: `${this.state.bgSize}%`,
+            // backgroundPositionX: `${this.state.cursorX}px`,
         };
 
         if (!this.props.randomCardImageUrl) {
@@ -51,29 +61,30 @@ class Home extends Component {
                 <>
                     <section className="home-container"  >
 
-                        <div className="home" style={bgCard}></div>
+                        <div 
+                            className="home" 
+                            style={bgCard}
+                        ></div>
                         
                         <div className="home-button-container">
 
                             <Link to={{
-                                pathname:'/cardsearch'
+                                pathname:'/card-search'
                                 }}>
                                 <button className='btn-red'>
                                     Card Search
                                 </button>
                             </Link>
 
-                            <Link to={{
-                                pathname:'/randomcard'
+                            {/* <Link to={{
+                                pathname:'/random-card'
                                 }}>
                                 <button className='btn-gray'>
                                     Random Card
                                 </button>
-                            </Link>
+                            </Link> */}
         
-                            <Link to={{
-                                pathname:'/allcards'
-                                }}>
+                            <Link to={'/random-pack-rna'}>
                                 <button>
                                     Random pack of Ravnica Allegiance
                                 </button>

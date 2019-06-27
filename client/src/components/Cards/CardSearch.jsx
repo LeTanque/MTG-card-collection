@@ -46,6 +46,9 @@ class CardSearch extends Component {
 
     submitSearch = event => {
         event.preventDefault();
+        this.setState({
+            searchResultPlaceholder:"Searching..."
+        })
         this.findCardByName(this.state.inputCardName);
     }
 
@@ -57,14 +60,14 @@ class CardSearch extends Component {
                 
                 <section className="search-form">
                     <form 
-                    onSubmit={this.submitSearch}
+                        onSubmit={this.submitSearch}
                     >
                         <input 
-                        type="text"
-                        name="inputCardName"
-                        placeholder="Input card name here"
-                        onChange={this.handleChanges}
-                        value={this.state.inputCardName}
+                            type="text"
+                            name="inputCardName"
+                            placeholder="Input card name here"
+                            onChange={this.handleChanges}
+                            value={this.state.inputCardName}
                         />
                     </form>
                 </section>
@@ -75,11 +78,11 @@ class CardSearch extends Component {
                         if(card.imageUrl) {
                             return (
                                 <div 
-                                key={card.multiverseid}
-                                className="card"
+                                    key={card.multiverseid}
+                                    className="card"
                                 >       
                                     <Card 
-                                    card={card} 
+                                        card={card}
                                     />
                                 </div>
                             )

@@ -17,6 +17,19 @@
 }
 
 
+.search-form {
+    form {
+        width: 90%;
+        max-width: 500px;
+        input {
+            background-color: $black;
+            color: $white;
+            width: 100%;
+        }
+    }
+}
+
+
 .cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -26,7 +39,11 @@
         padding: 10px;
         img {
             border-radius: 14px;
+            max-width: 223px;
         }
+    }
+    .card-search-placeholder {
+        color: $gray;
     }
 }
 

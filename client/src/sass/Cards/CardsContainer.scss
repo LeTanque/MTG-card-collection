@@ -8,10 +8,22 @@
     justify-content: center;
     @include material-shadow($spread: 6px);
     .nav-icons {
-        display: flex;
-        align-items: center;
         .nav-icon {
-            font-size: 4.4rem;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-size: 2rem;
+            margin: 10px auto;
+            max-width: 80%;
+            div {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                button {
+                    margin: 5px;
+                }
+
+            }
         }
     }
 }
@@ -59,4 +71,10 @@
             width: 40vw;
         }
     }
+}
+
+.all-sets {
+    padding: 10px;
+    display: flex;
+
 }

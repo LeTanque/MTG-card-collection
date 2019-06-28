@@ -6,14 +6,39 @@ import NavBar from './Navigation/NavBar.jsx';
 import RandomCard from './Cards/RandomCard.jsx';
 import CardSearch from './Cards/CardSearch.jsx';
 import RandomPack from './Cards/RandomPack.jsx';
+import AdminTools from './Admin/AdminTools.jsx';
 
 
-
+// Returns random numbers in a safe range for rendering cards
 function getRandomNumber(min, max) {
   const random = Math.random() * (max - min) + min;
   return Math.floor(random)
 }
 
+// Returns arrays sorted by a key in ascending or descending order
+function sortingHat(key, order='asc') {
+  return function(a, b) {
+    if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      // property doesn't exist on either object
+      return 0;
+    }
+
+    const variableA = (typeof a[key] === 'string') ?
+      a[key].toUpperCase() : a[key];
+    const variableB = (typeof b[key] === 'string') ?
+      b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (variableA > variableB) {
+      comparison = 1;
+    } else if (variableA < variableB) {
+      comparison = -1;
+    }
+    return (
+      (order === 'desc') ? (comparison * -1) : comparison
+    );
+  };
+}
 
 
 class App extends Component {
@@ -21,11 +46,13 @@ class App extends Component {
     // baseURL:`https://api.magicthegathering.io/v1/cards?page=1&pageSize=50`,
     cardsURL:`/cards?page=`,
     cardsPageNumber:`1`,
-    randomPackUrlRNA:`https://api.magicthegathering.io/v1/sets/rna/booster`,
+    getAllTheSets: `https://api.magicthegathering.io/v1/sets`,
+    allTheSets: null,
+    // randomPackUrlRNA:`https://api.magicthegathering.io/v1/sets/rna/booster`,
     randomCardUrl:`https://api.magicthegathering.io/v1/cards/${getRandomNumber(1, 1000)}`,
     randomCard:{},
     sampleCard:{
-      "name":"Plains",
+      name:"Plains",
       cmc:0,
       colors:[], 
       colorIdentity:["white"], 
@@ -36,20 +63,19 @@ class App extends Component {
     location:`rna`
   }
 
-
   componentDidMount() {
     this.getCard(this.state.randomCardUrl);
-
     // this.getCards(this.state.baseURL + this.state.cardsURL + this.state.cardsPageNumber);
     // console.log(this.state.randomCardUrl)
     // this.getCardsSDK()
   }
 
-
   // This method retrieves a random pack of cards
-  getPackOfCards = URL => {
+  getPackOfCards = setId => {
     // At a high level we are calling an API to fetch some mtg card data.
     // We then take that data and set it to our state.
+    const URL = `https://api.magicthegathering.io/v1/sets/${setId}/booster`;
+    console.log("getPackOfCards launched")
     fetch(URL)
     .then(res => {
       // console.log(res);
@@ -66,10 +92,9 @@ class App extends Component {
   };
 
   // This method triggers the above method when we click on the open pack button
-  openPackOfCards = () => {
-    this.getPackOfCards(this.state.randomPackUrlRNA);
-  }
-
+  // openPackOfCards = setId => {
+  //   this.getPackOfCards(setId);
+  // }
 
   getCard = URL => {
     fetch(URL)
@@ -84,6 +109,16 @@ class App extends Component {
     })
   }
 
+  getAllTheSets = () => {
+    fetch(this.state.getAllTheSets)
+    .then(response => {
+      return response.json()
+    })
+    .then(response => {
+      this.setState({ allTheSets: response.sets.sort(sortingHat('releaseDate', 'desc')) })
+    })
+    .catch(error => {console.log("getAllTheSets error", error)})
+  }
 
   getCardsSDK = () => {
   //   mtg.card  // This is basically the same thing as the fetch, only it uses the mtg sdk imported aboves
@@ -111,26 +146,11 @@ class App extends Component {
   }
 
 
-
-  goToNextPage = () => {
-    // let currentPage = this.state.cardsPageNumber;
-    // console.log('This is the current page:', currentPage);
-
-    // this.setState({
-    //   cardsPageNumber: ++currentPage
-    // });
-    
-    // this.getCards(this.state.baseURL + this.state.cardsURL + this.state.cardsPageNumber);
-  }
-
-
   render() {
     // console.log("App state allCards", this.state.allCards)
     return (
       <BrowserRouter>
         <NavBar />
-        
-
         
         <Route 
           exact
@@ -143,25 +163,23 @@ class App extends Component {
           )}
         />
 
-
-        <Route 
-          path='/random-pack-rna'
-          render={() => (
-            <RandomPack 
-              allCards={this.state.allCards} 
-              openPackOfCards={this.openPackOfCards}
-              // getCardsSDK={this.getCardsSDK}
-              // goToNextPage={this.goToNextPage}
-            />
-          )}
-        />
-
-
         <Route 
           path='/random-card'
           render={() => (
             <RandomCard 
-              randomCard={this.state.randomCard}
+            randomCard={this.state.randomCard}
+            />
+            )}
+        />
+
+        <Route 
+          path='/random-pack'
+          render={() => (
+            <RandomPack 
+              allCards={this.state.allCards} 
+              getPackOfCards={this.getPackOfCards}
+              // getCardsSDK={this.getCardsSDK}
+              // goToNextPage={this.goToNextPage}
             />
           )}
         />
@@ -171,6 +189,16 @@ class App extends Component {
           render={() => (
             <CardSearch 
 
+            />
+          )}
+        />
+
+        <Route 
+          path='/admin-tools'
+          render={() => (
+            <AdminTools 
+              getAllTheSets={this.getAllTheSets}
+              allTheSets={this.state.allTheSets}
             />
           )}
         />

@@ -76,17 +76,17 @@ class Home extends Component {
                                 </button>
                             </Link>
 
-                            {/* <Link to={{
-                                pathname:'/random-card'
-                                }}>
-                                <button className='btn-gray'>
-                                    Random Card
-                                </button>
-                            </Link> */}
-        
-                            <Link to={'/random-pack-rna'}>
+                            <Link to={'/random-pack'}>
                                 <button>
-                                    Random pack of Ravnica Allegiance
+                                    Random Pack
+                                </button>
+                            </Link>
+
+                            <Link to={{
+                                pathname:'/admin-tools'
+                                }}>
+                                <button className='btn-dark'>
+                                    Admin Tools
                                 </button>
                             </Link>
     

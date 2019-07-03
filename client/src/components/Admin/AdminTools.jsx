@@ -1,7 +1,12 @@
 import React from 'react'
+import { Keyrune } from "@saeris/react-keyrune"
+
 
 const AdminTools = props => {
 
+    const upperCaseThis = thing => {
+        return thing.toLowerCase();
+    }
 
     return (
         <>
@@ -15,11 +20,20 @@ const AdminTools = props => {
                     <p className="all-sets">
                         {set.name}
                         <br />
-                        {set.code}
-                        <br />
                         {set.type}
                         <br />
                         {set.releaseDate}
+                        <br />
+                        {set.code}
+                        <br />
+                        <Keyrune 
+                            fixed
+                            set={upperCaseThis(set.code)}
+                            rarity="rare" 
+                            size="2x"
+                        />
+                        <br />
+                        <br />
                     </p>
                 </React.Fragment>
             )) : null}
@@ -29,3 +43,4 @@ const AdminTools = props => {
 }
 
 export default AdminTools
+

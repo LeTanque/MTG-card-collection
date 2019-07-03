@@ -1,0 +1,24 @@
+.collection {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    justify-content: left;
+    .card-in-collection {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        img {
+            border-radius: 14px;
+            max-width: fit-content;
+        }
+        .card-details {
+            margin: 10px 0 0 10px;
+            max-width: 300px;
+            .set-icon {
+                @include font-shadow($font-shadow-x: 1px, $font-shadow-y: 1px, $font-shadow-blur: 3px, $font-shadow-color: $black);
+            }
+        }
+    }
+}
+    

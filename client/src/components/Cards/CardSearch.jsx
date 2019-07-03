@@ -71,6 +71,8 @@ class CardSearch extends Component {
 
                 <section className="cards-container">
 
+                    <div className="card-search-placeholder">{this.state.searchResultPlaceholder}</div>
+
                     {this.state.cardSearchResults.map(card => {
                         return (
                             <React.Fragment key={card.id}>
@@ -80,8 +82,6 @@ class CardSearch extends Component {
                             </React.Fragment>
                         )
                     })}
-
-                    <div className="card-search-placeholder">{this.state.searchResultPlaceholder}</div>
 
                 </section>
             </>

@@ -1,112 +1,51 @@
-.cards-nav {
-    position: sticky;
-    top: 72px;
-    background-color: $gray;
-    color: $dark;
-    width: 100%;
+.all-sets {
+    padding: 10px;
     display: flex;
-    justify-content: center;
-    @include material-shadow($spread: 6px);
-    .nav-icons {
-        .nav-icon {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            font-size: 2rem;
-            margin: 10px auto;
-            max-width: 80%;
-            div {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                button {
-                    margin: 5px;
-                }
-
-            }
-        }
-    }
 }
-
-
-.search-form {
-    form {
-        width: 90%;
-        max-width: 500px;
-        input {
-            background-color: $black;
-            color: $white;
-            width: 100%;
-        }
-    }
-}
-
 
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 0 20px;
+    margin-top: 10px;
+    @include phone {
+        padding: 0;
+    }
+    .card-search-placeholder {
+        color: $gray;
+        width: 100%;
+        margin: 0 auto 10px auto;
+        text-align: center;
+    }
     .card {
         padding: 10px;
-        &:active, &:focus {
-            width: 100%;
-            position: fixed;
-            bottom: 0;
-        }
+        // &:active, &:focus {
+        //     width: 100%;
+        //     position: fixed;
+        //     bottom: 0;
+        // }
         img {
             border-radius: 14px;
             max-width: 150px;
             &:active, &:focus {
-                max-width: fit-content;
+                // max-width: fit-content;
                 @include box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 3px, $box-shadow-color: $black);
             }
-        }
-    }
-    .card-search-placeholder {
-        color: $gray;
-    }
-}
-.collection {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 20px;
-    justify-content: left;
-    .card-in-collection {
-        padding: 10px;
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        img {
-            border-radius: 14px;
-            max-width: fit-content;
-        }
-        .card-details {
-            margin: 10px 0 0 10px;
-            max-width: 300px;
-            .set-icon {
-                @include font-shadow($font-shadow-x: 1px, $font-shadow-y: 1px, $font-shadow-blur: 3px, $font-shadow-color: $black);
+            @include phone {
+                max-width: 140px;
             }
         }
     }
-}
-
-.random-card {
-    align-content: center;
-    height: calc(100vh - 72px);
-    align-items: center;
-    flex-wrap: unset;
-    width: 100%;
-    .card {
-        padding: 0;
-        img {
-            width: 40vw;
+    .card-button {
+        display: flex;
+        padding: 5px 0;
+        .button-heart {
+            color: $red;
         }
     }
 }
 
-.all-sets {
-    padding: 10px;
-    display: flex;
 
-}
+
+

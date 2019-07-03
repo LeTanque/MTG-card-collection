@@ -1,4 +1,3 @@
-
 nav {
     display: flex;
     position: sticky;
@@ -12,7 +11,7 @@ nav {
     @include box-shadow($box-shadow-x: 0px, $box-shadow-y: 3px, $box-shadow-blur: 9px, $box-shadow-spread: 0px, $box-shadow-color: $black);
     .nav-logo {
         color: $white;
-        @include font-logo; 
+        @include font-logo;
     }
 }
 

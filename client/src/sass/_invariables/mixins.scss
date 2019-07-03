@@ -82,6 +82,9 @@ a {
 @mixin material-shadow($spread: 6px) {
   box-shadow: 0 3px $spread rgba(26, 26, 26, 0.3), 0 3px $spread rgba(51, 51, 51, 0.45);
 }
+@mixin material-shadow-dark($spread: 6px) {
+  box-shadow: 0 3px $spread rgba(0, 0, 0, 0.3), 0 3px $spread rgba(12, 12, 12, 0.45);
+}
 
 // Dynamic styling
 .completed {

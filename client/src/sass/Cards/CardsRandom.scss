@@ -1,0 +1,14 @@
+.random-card {
+    align-content: center;
+    height: calc(100vh - 72px);
+    align-items: center;
+    flex-wrap: unset;
+    width: 100%;
+    .card {
+        padding: 0;
+        img {
+            width: 40vw;
+        }
+    }
+}
+

@@ -13,7 +13,6 @@ const RandomPack = props => {
             <section className="cards-nav">
                 <div className="nav-icons">
                     <div className="nav-icon">
-                        <span>Click to open a new pack</span>
                         <div>
                             <button
                                 onClick={() => props.getPackOfCards("rna")}

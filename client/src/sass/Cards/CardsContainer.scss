@@ -49,13 +49,45 @@
     padding: 0 20px;
     .card {
         padding: 10px;
+        &:active, &:focus {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
         img {
             border-radius: 14px;
-            max-width: 223px;
+            max-width: 150px;
+            &:active, &:focus {
+                max-width: fit-content;
+                @include box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 3px, $box-shadow-color: $black);
+            }
         }
     }
     .card-search-placeholder {
         color: $gray;
+    }
+}
+.collection {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    justify-content: left;
+    .card-in-collection {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        img {
+            border-radius: 14px;
+            max-width: fit-content;
+        }
+        .card-details {
+            margin: 10px 0 0 10px;
+            max-width: 300px;
+            .set-icon {
+                @include font-shadow($font-shadow-x: 1px, $font-shadow-y: 1px, $font-shadow-blur: 3px, $font-shadow-color: $black);
+            }
+        }
     }
 }
 

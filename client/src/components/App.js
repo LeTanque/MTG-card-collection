@@ -3,10 +3,11 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Home from './Navigation/Home.jsx';
 import NavBar from './Navigation/NavBar.jsx';
-import RandomCard from './Cards/RandomCard.jsx';
 import CardSearch from './Cards/CardSearch.jsx';
-import RandomPack from './Cards/RandomPack.jsx';
+import RandomCard from './RandomCards/RandomCard.jsx';
+import RandomPack from './RandomCards/RandomPack.jsx';
 import AdminTools from './Admin/AdminTools.jsx';
+import Collection from './Collection/Collection.jsx';
 
 
 // Returns random numbers in a safe range for rendering cards
@@ -75,7 +76,7 @@ class App extends Component {
     // At a high level we are calling an API to fetch some mtg card data.
     // We then take that data and set it to our state.
     const URL = `https://api.magicthegathering.io/v1/sets/${setId}/booster`;
-    console.log("getPackOfCards launched")
+    // console.log("getPackOfCards launched")
     fetch(URL)
     .then(res => {
       // console.log(res);
@@ -199,6 +200,15 @@ class App extends Component {
             <AdminTools 
               getAllTheSets={this.getAllTheSets}
               allTheSets={this.state.allTheSets}
+            />
+          )}
+        />
+
+        <Route 
+          path='/collection'
+          render={() => (
+            <Collection 
+
             />
           )}
         />

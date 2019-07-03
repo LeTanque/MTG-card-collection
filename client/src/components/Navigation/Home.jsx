@@ -64,7 +64,8 @@ class Home extends Component {
                         <div 
                             className="home" 
                             style={bgCard}
-                        ></div>
+                        >
+                        </div>
                         
                         <div className="home-button-container">
 
@@ -77,8 +78,16 @@ class Home extends Component {
                             </Link>
 
                             <Link to={'/random-pack'}>
-                                <button>
+                                <button className="btn-red">
                                     Random Pack
+                                </button>
+                            </Link>
+
+                            <Link to={{
+                                pathname:'/collection'
+                                }}>
+                                <button className='btn-red'>
+                                    Collection
                                 </button>
                             </Link>
 

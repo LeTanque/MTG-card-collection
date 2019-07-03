@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import mtg from 'mtgsdk';
+// import axios from 'axios';
 import Card from './Card.jsx';
 
 
@@ -19,7 +20,7 @@ class CardSearch extends Component {
             // language: 'english'
         })
         .then(results => {
-            console.log("These are the findCardByName results", results);
+            // console.log("These are the findCardByName results", results);
             if(results.length === 0) {
                 this.setState({
                     inputCardName:'',
@@ -29,8 +30,6 @@ class CardSearch extends Component {
             else {
                 this.setState({
                     cardSearchResults:results,
-                    // cardName:results[0].name,
-                    // cardImage:results[0].imageUrl,
                     searchResultPlaceholder:'',
                     inputCardName:''
                 })
@@ -52,12 +51,10 @@ class CardSearch extends Component {
         this.findCardByName(this.state.inputCardName);
     }
 
-    render() {
 
+    render() {
         return (
-            <>
-                {/* <h5>Search for MTG cards by name</h5> */}
-                
+            <>  
                 <section className="search-form">
                     <form 
                         onSubmit={this.submitSearch}
@@ -75,23 +72,14 @@ class CardSearch extends Component {
                 <section className="cards-container">
 
                     {this.state.cardSearchResults.map(card => {
-                        if(card.imageUrl) {
-                            return (
-                                <div 
-                                    key={card.multiverseid}
-                                    className="card"
-                                >       
-                                    <Card 
-                                        card={card}
-                                    />
-                                </div>
-                            )
-                        }
                         return (
-                            <React.Fragment key={Math.random()}/>
+                            <React.Fragment key={card.id}>
+                                <Card 
+                                    card={card}
+                                />
+                            </React.Fragment>
                         )
-                    }
-                    )}
+                    })}
 
                     <div className="card-search-placeholder">{this.state.searchResultPlaceholder}</div>
 

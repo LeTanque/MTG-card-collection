@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-
+import Card from './Card.jsx';
 import Loader from 'react-loader-spinner';
 
 
@@ -35,9 +35,9 @@ const Pack = props => {
                 {props.allCards.map(eachCard => 
                     (
                         <Fragment key={eachCard.id}>
-                            <div className="card">
-                                <img src={eachCard.imageUrl} alt={eachCard.name} />
-                            </div>
+                            <Card 
+                                card={eachCard}
+                            />
                         </Fragment>
                     ))
                 }

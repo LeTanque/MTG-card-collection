@@ -1,4 +1,4 @@
-nav {
+.nav {
     display: flex;
     position: sticky;
     top: 0;
@@ -12,6 +12,12 @@ nav {
     .nav-logo {
         color: $white;
         @include font-logo;
+    }
+    nav {
+        display: flex;
+        span {
+            margin: 0 10px;
+        }
     }
 }
 

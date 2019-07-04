@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Keyrune } from "@saeris/react-keyrune"
 
 // 
@@ -9,18 +9,29 @@ class NavBar extends Component {
     render() {
         return (
             <>
-                <nav>
+                <section className="nav">
                     <Link to={{pathname:"/"}}>
                         <h2 className="nav-logo">Magical</h2>
                     </Link>
 
-                    <Keyrune 
-                        gradient fixed 
-                        set="ugl" 
-                        rarity="mythic" 
-                        size="3x"
-                    />
-                </nav>
+                    <nav>
+                        <NavLink to={"/card-search"}>
+                            <span>Search</span>
+                        </NavLink>
+                        <NavLink to={"/random-pack"}>
+                            <span>Random Pack</span>
+                        </NavLink>
+                        <NavLink to={"/collection"}>
+                            <span>Collection</span>
+                        </NavLink>
+                        <Keyrune 
+                            gradient fixed 
+                            set="ugl" 
+                            rarity="mythic" 
+                            size="3x"
+                        />
+                    </nav>
+                </section>
             </>
         );
     }

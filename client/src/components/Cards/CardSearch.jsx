@@ -10,7 +10,8 @@ class CardSearch extends Component {
         cardName:'',
         cardImage:'',
         searchResultPlaceholder:'Search for cards',
-        inputCardName:''
+        inputCardName:'',
+        status:null
     }
 
     findCardByName = cardName => {
@@ -27,10 +28,15 @@ class CardSearch extends Component {
                     searchResultPlaceholder:'No results!'
                 })
             }
+            if(results === null) {
+                this.setState({
+                    searchResultPlaceholder:'Searching...',
+                })
+            }
             else {
                 this.setState({
                     cardSearchResults:results,
-                    searchResultPlaceholder:'',
+                    searchResultPlaceholder:`Found ${results.length} cards`,
                     inputCardName:''
                 })
             }
@@ -51,6 +57,11 @@ class CardSearch extends Component {
         this.findCardByName(this.state.inputCardName);
     }
 
+    statusCheck = status => {
+        this.setState({
+            status:status
+        })
+    }
 
     render() {
         return (
@@ -71,13 +82,21 @@ class CardSearch extends Component {
 
                 <section className="cards-container">
 
-                    <div className="card-search-placeholder">{this.state.searchResultPlaceholder}</div>
+                    <div className="card-search-placeholder">
+                        {this.state.searchResultPlaceholder}
+                    </div>
+                    
+                    <span className={this.state.status === null ? "display-none" : "card-action-status"}>
+                        {this.state.status}
+                    </span>
 
                     {this.state.cardSearchResults.map(card => {
                         return (
                             <React.Fragment key={card.id}>
                                 <Card 
                                     card={card}
+                                    status={this.state.status}
+                                    statusCheck={this.statusCheck}
                                 />
                             </React.Fragment>
                         )

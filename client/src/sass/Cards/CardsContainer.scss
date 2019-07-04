@@ -18,6 +18,13 @@
         margin: 0 auto 10px auto;
         text-align: center;
     }
+    .card-action-status {
+        position: fixed;
+        bottom: 50px;
+        background-color: $dark-gray;
+        padding: 10px 20px;
+        z-index: 50;
+    }
     .card {
         padding: 10px;
         img {
@@ -37,6 +44,17 @@
         font-size: 2.5rem;
         .button-heart {
             color: $red;
+        }
+        .button-enlarge {
+            color: $gray;
+        }
+        svg {
+            margin-right: 10px;
+            border-radius: 5px;
+            &:hover, &:focus {
+                @include box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 3px, $box-shadow-color: $white);
+                transition-duration: 0.75s;
+            }
         }
     }
 }

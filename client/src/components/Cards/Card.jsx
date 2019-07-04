@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { 
-    GoPlus, 
-    GoHeart,
+    // GoPlus, 
+    // GoHeart,
     GoX,
     GoTrashcan,
     // GoDiffAdded,
     // GoLinkExternal
 } from 'react-icons/go';
+import {
+    // FaHeart,
+    FaRegCheckSquare,
+} from 'react-icons/fa';
+import {
+    MdImage,
+} from 'react-icons/md';
 import axios from 'axios';
 import { Keyrune } from "@saeris/react-keyrune";
 
@@ -14,23 +21,37 @@ import { Keyrune } from "@saeris/react-keyrune";
 class Card extends Component {
     state = {
         cardObject:{},
-        cardModal:false
+        cardModal:false,
+        status:null
     }
 
+    componentDidMount() {
+        this.setState({
+            status:this.props.status
+        })
+    }
 
     addCardToCollection = () => {
         axios
         .post(`${process.env.REACT_APP_DB_BASE}/cards`, this.props.card)
         // .post(`http://localhost:3333/cards`, this.props.card)
         .then(response => {
-            // console.log("addCard response:  ", response)
-            console.log(process.env.REACT_APP_DB_BASE)
+            console.log("addCard response:  ", response)
+            const statusUpdate = `Added ${this.props.card.name} to your collection!`
             this.setState({
                 cardObject:this.props.card,
-                cardModal:false
+                cardModal:false,
+                status:statusUpdate
             })
+            this.props.statusCheck(statusUpdate)
         })
-        .catch(error => console.log("addCard error:", error, "Likely, this card already exist in your collection"))
+        .catch(error => {
+            const statusUpdate = `Error adding ${this.props.card.name}!`
+            this.setState({
+                status:statusUpdate
+            })
+            this.props.statusCheck(statusUpdate)
+        })
     }
 
     lowerCaseThis = thing => {
@@ -125,8 +146,14 @@ class Card extends Component {
                         </div>
 
                         <div className={this.buttonShow()} >
-                            <GoHeart onClick={this.addCardToCollection} className="button-heart" />
-                            <GoPlus onClick={this.toggleCard} />
+                            <FaRegCheckSquare 
+                                onClick={this.addCardToCollection} 
+                                className="button-heart" 
+                            />
+                            <MdImage 
+                                onClick={this.toggleCard} 
+                                className="button-enlarge" 
+                            />
                         </div>
 
                     </section>

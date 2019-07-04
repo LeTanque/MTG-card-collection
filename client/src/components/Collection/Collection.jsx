@@ -7,7 +7,8 @@ class Collection extends Component {
     state = {
         collection: [],
         collectionResultPlaceholder:"Collection loading",
-        cardInCollection: true
+        cardInCollection: true,
+        status: null
     }
 
     componentDidMount() {
@@ -40,8 +41,8 @@ class Collection extends Component {
             // console.log("remove response", response.data.card)
             const newCollection = this.state.collection.filter(card => card.multiverseid !== response.data.card.multiverseid)
             this.setState({
-                collectionResultPlaceholder:"Removed",
-                collection:[...newCollection]
+                collectionResultPlaceholder:`Removed ${response.data.card.name}`,
+                collection:[...newCollection],
             })
         })
         .catch(error => console.log(error))
@@ -50,7 +51,10 @@ class Collection extends Component {
     render() {
         return (
             <section className="cards-container collection">
-                <div className="card-search-placeholder">{this.state.collectionResultPlaceholder}</div>
+                
+                <div className="card-search-placeholder">
+                    {this.state.collectionResultPlaceholder}
+                </div>
 
                 {this.state.collection.map(card => (
                     <React.Fragment key={card.id}>

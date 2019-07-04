@@ -24,6 +24,7 @@ class Card extends Component {
         // .post(`http://localhost:3333/cards`, this.props.card)
         .then(response => {
             // console.log("addCard response:  ", response)
+            console.log(process.env.REACT_APP_DB_BASE)
             this.setState({
                 cardObject:this.props.card,
                 cardModal:false

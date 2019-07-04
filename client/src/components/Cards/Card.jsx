@@ -3,6 +3,7 @@ import {
     GoPlus, 
     GoHeart,
     GoX,
+    GoTrashcan,
     // GoDiffAdded,
     // GoLinkExternal
 } from 'react-icons/go';
@@ -13,28 +14,29 @@ import { Keyrune } from "@saeris/react-keyrune";
 class Card extends Component {
     state = {
         cardObject:{},
-        cardModal: false
+        cardModal:false
     }
 
-    selectCard = event => {
-        event.preventDefault();
-        console.log(this.props.card)
-        this.setState({
-            cardObject:this.props.card
-        })
-        this.addCardToCollection(this.props.card)
-    }
 
-    addCardToCollection = (cardObj) => {
-        console.log("addCard cardObj: ", cardObj);
+    addCardToCollection = () => {
         axios
-        .post("http://localhost:3333/cards", cardObj)
-        .then(response => console.log("addCard response:  ", response))
+        .post(`${process.env.REACT_APP_DB_BASE}/cards`, this.props.card)
+        // .post(`http://localhost:3333/cards`, this.props.card)
+        .then(response => {
+            // console.log("addCard response:  ", response)
+            this.setState({
+                cardObject:this.props.card,
+                cardModal:false
+            })
+        })
         .catch(error => console.log("addCard error:", error, "Likely, this card already exist in your collection"))
     }
 
     lowerCaseThis = thing => {
-        return thing.toLowerCase();
+        if(thing) {
+            return thing.toLowerCase()
+        }
+        return null
     }
 
     toggleCard = () => {
@@ -65,7 +67,6 @@ class Card extends Component {
     }
 
     render () {
-        // console.log(this.state.cardObject)
         if(this.state.cardModal) {
             return (
                 <section className="card-modal">
@@ -109,10 +110,14 @@ class Card extends Component {
                                 className="set-icon"
                             />
                             {this.props.card.setName}
+                            <br />
+                            <GoTrashcan 
+                                onClick={() => this.props.removeCardFromCollection(this.props.card.multiverseid)} 
+                            />
                         </div>
 
                         <div className={this.buttonShow()} >
-                            <GoHeart onClick={this.selectCard} className="button-heart" />
+                            <GoHeart onClick={this.addCardToCollection} className="button-heart" />
                             <GoPlus onClick={this.toggleCard} />
                         </div>
 

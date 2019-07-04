@@ -14,6 +14,7 @@ class Collection extends Component {
         axios
         .get("http://localhost:3333/cards")
         .then(results=>{
+            console.log("Collection CDM results: ",results)
             if(results.length === 0) {
                 this.setState({
                     inputCardName:'',
@@ -22,7 +23,7 @@ class Collection extends Component {
             }
             else {
                 this.setState({
-                    collection:results.data,
+                    collection:[...results.data],
                     collectionResultPlaceholder:'',
                 })
             }

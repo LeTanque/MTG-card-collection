@@ -6,6 +6,7 @@ import {
     // GoDiffAdded,
     // GoLinkExternal
 } from 'react-icons/go';
+import axios from 'axios';
 import { Keyrune } from "@saeris/react-keyrune";
 
 
@@ -21,13 +22,18 @@ class Card extends Component {
         this.setState({
             cardObject:this.props.card
         })
+        this.addCardToCollection(this.props.card)
     }
 
-    addCardToCollection = () => {
-
+    addCardToCollection = (cardObj) => {
+        console.log("addCard cardObj: ", cardObj);
+        axios
+        .post("http://localhost:3333/cards", cardObj)
+        .then(response => console.log("addCard response:  ", response))
+        .catch(error => console.log("addCard error:", error, "Likely, this card already exist in your collection"))
     }
 
-    upperCaseThis = thing => {
+    lowerCaseThis = thing => {
         return thing.toLowerCase();
     }
 
@@ -97,8 +103,8 @@ class Card extends Component {
                                 // gradient 
                                 // foil
                                 fixed
-                                set={this.upperCaseThis(this.props.card.set)}
-                                rarity={this.upperCaseThis(this.props.card.rarity)} 
+                                set={this.lowerCaseThis(this.props.card.set)}
+                                rarity={this.lowerCaseThis(this.props.card.rarity)} 
                                 size="2x"
                                 className="set-icon"
                             />

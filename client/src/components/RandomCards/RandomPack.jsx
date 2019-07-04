@@ -1,9 +1,6 @@
 import React from 'react'
 import Pack from '../Cards/Pack.jsx';
 
-// Not working, unfortunately
-// this.props.getPackOfCards("uma")
-// this.props.getPackOfCards("mh1")
 
 
 const RandomPack = props => {

@@ -36,7 +36,7 @@ class Card extends Component {
         .post(`${process.env.REACT_APP_DB_BASE}/cards`, this.props.card)
         // .post(`http://localhost:3333/cards`, this.props.card)
         .then(response => {
-            console.log("addCard response:  ", response)
+            // console.log("addCard response:  ", response)
             const statusUpdate = `Added ${this.props.card.name} to your collection!`
             this.setState({
                 cardObject:this.props.card,
@@ -46,6 +46,7 @@ class Card extends Component {
             this.props.statusCheck(statusUpdate)
         })
         .catch(error => {
+            // console.log("addCard error:  ", error)
             const statusUpdate = `Error adding ${this.props.card.name}!`
             this.setState({
                 status:statusUpdate

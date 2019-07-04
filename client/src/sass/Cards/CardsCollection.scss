@@ -3,18 +3,37 @@
     flex-wrap: wrap;
     padding: 0 20px;
     justify-content: left;
+    max-width: 800px;
+    margin: 0 auto;
     .card-in-collection {
         padding: 10px;
         display: flex;
         flex-direction: row;
         width: 100%;
-        img {
-            border-radius: 14px;
-            max-width: fit-content;
+        .card-img-container {
+            width: 100%;
+            max-width: 50%;
+            display: flex;
+            justify-content: center;
+            img {
+                border-radius: 14px;
+                max-width: max-content;
+                max-height: max-content;
+                @include phone {
+                    width: 100%;
+                }
+            }
         }
         .card-details {
             margin: 10px 0 0 10px;
-            max-width: 300px;
+            max-width: 50%;
+            width: 100%;
+            div {
+                margin-top: 10px;
+            }
+            div.italic {
+                font-size: 1.4rem;
+            }
             .set-icon {
                 @include font-shadow($font-shadow-x: 1px, $font-shadow-y: 1px, $font-shadow-blur: 3px, $font-shadow-color: $black);
             }

@@ -20,16 +20,10 @@
     }
     .card {
         padding: 10px;
-        // &:active, &:focus {
-        //     width: 100%;
-        //     position: fixed;
-        //     bottom: 0;
-        // }
         img {
             border-radius: 14px;
             max-width: 150px;
             &:active, &:focus {
-                // max-width: fit-content;
                 @include box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 3px, $box-shadow-color: $black);
             }
             @include phone {
@@ -40,6 +34,7 @@
     .card-button {
         display: flex;
         padding: 5px 0;
+        font-size: 2.5rem;
         .button-heart {
             color: $red;
         }

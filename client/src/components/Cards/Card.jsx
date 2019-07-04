@@ -70,11 +70,8 @@ class Card extends Component {
     render () {
         if(this.state.cardModal) {
             return (
-                <section className="card-modal">
-                    <GoX 
-                        className="modal-close" 
-                        onClick={this.toggleCard}
-                    />
+                <section className="card-modal" onClick={this.toggleCard}>
+                    <GoX className="modal-close" />
                     <img 
                         src={this.props.card.imageUrl} 
                         alt={this.props.card.name}  
@@ -86,21 +83,29 @@ class Card extends Component {
             return (
                 <>
                     <section className={this.cardSize()}>
-                        <img 
-                            src={this.props.card.imageUrl} 
-                            alt={this.props.card.name}  
-                        />
+                        <div className="card-img-container">
+                            <img 
+                                src={this.props.card.imageUrl} 
+                                alt={this.props.card.name}  
+                            />
+                        </div>
                         <div className={this.collectionView()}>
                             <h4>
                                 {this.props.card.name}
-                            </h4>
-                            <br />
-                            {this.props.card.type}
-                            <br />
-                            {this.props.card.text}
-                            <br />
-                            {this.props.card.flavor}
-                            <br />
+                            </h4><br />
+                            
+                            <div>
+                                {this.props.card.type}
+                            </div><br />
+
+                            <div>
+                                {this.props.card.text}
+                            </div><br />
+                            
+                            <div className="italic">
+                                {this.props.card.flavor}
+                            </div> <br />
+                            
                             <Keyrune 
                                 // gradient 
                                 // foil
@@ -110,8 +115,10 @@ class Card extends Component {
                                 size="2x"
                                 className="set-icon"
                             />
-                            {this.props.card.setName}
-                            <br />
+                            <div className="bold">
+                                {this.props.card.setName}
+                            </div><br />
+
                             <GoTrashcan 
                                 onClick={() => this.props.removeCardFromCollection(this.props.card.multiverseid)} 
                             />

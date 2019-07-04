@@ -7,16 +7,30 @@
     background-color: $black;
     width: 100%;
     padding: 20px;
+    font-size: 1.5rem;
     z-index: 100;
     @include box-shadow($box-shadow-x: 0px, $box-shadow-y: 3px, $box-shadow-blur: 9px, $box-shadow-spread: 0px, $box-shadow-color: $black);
+    @include phone {
+        font-size:1rem;
+    }
+    h2 {
+        font-size: 2.75rem;
+        @include phone {
+            font-size: 1.75rem;
+        }
+    }
     .nav-logo {
         color: $white;
         @include font-logo;
     }
     nav {
         display: flex;
+        align-items: center;
         span {
             margin: 0 10px;
+            @include phone {
+                margin: 0 5px;
+            }
         }
     }
 }

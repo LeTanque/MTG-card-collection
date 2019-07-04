@@ -35,7 +35,13 @@
                 font-size: 1.4rem;
             }
             .set-icon {
+                margin: 15px 0 -5px 0;
                 @include font-shadow($font-shadow-x: 1px, $font-shadow-y: 1px, $font-shadow-blur: 3px, $font-shadow-color: $black);
+            }
+            .card-delete {
+                font-size: 2.5rem;
+                display: flex;
+                justify-content: flex-end;
             }
         }
     }

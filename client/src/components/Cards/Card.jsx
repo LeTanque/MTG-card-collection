@@ -113,19 +113,19 @@ class Card extends Component {
                         <div className={this.collectionView()}>
                             <h4>
                                 {this.props.card.name}
-                            </h4><br />
+                            </h4>
                             
                             <div>
                                 {this.props.card.type}
-                            </div><br />
+                            </div>
 
-                            <div>
+                            <div className={this.props.card.text ? null : "display-none"}>
                                 {this.props.card.text}
-                            </div><br />
+                            </div>
                             
-                            <div className="italic">
+                            <div className={this.props.card.flavor ? "italic" : "display-none"}>
                                 {this.props.card.flavor}
-                            </div> <br />
+                            </div>
                             
                             <Keyrune 
                                 // gradient 
@@ -138,11 +138,14 @@ class Card extends Component {
                             />
                             <div className="bold">
                                 {this.props.card.setName}
-                            </div><br />
+                            </div>
 
-                            <GoTrashcan 
-                                onClick={() => this.props.removeCardFromCollection(this.props.card.multiverseid)} 
-                            />
+                            <div className="card-delete">
+                                <GoTrashcan 
+                                    onClick={() => this.props.removeCardFromCollection(this.props.card.multiverseid)} 
+                                />
+                            </div>
+
                         </div>
 
                         <div className={this.buttonShow()} >

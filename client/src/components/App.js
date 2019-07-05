@@ -58,7 +58,7 @@ class App extends Component {
       colors:[], 
       colorIdentity:["white"], 
       type:"Basic Land — Plains",
-      imageUrl:"http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=8374&type=card" 
+      imageUrl:"https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=8374&type=card" 
     },
     allCards:null,
     location:`rna`

@@ -107,8 +107,10 @@ class Card extends Component {
                     <section className={this.cardSize()}>
                         <div className="card-img-container">
                             <img 
-                                src={this.props.card.imageUrl} 
+                                // src={this.props.card.imageUrl} 
+                                src={`https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${this.props.card.multiverseid}&type=card`}
                                 alt={this.props.card.name}  
+                                
                             />
                         </div>
                         <div className={this.collectionView()}>

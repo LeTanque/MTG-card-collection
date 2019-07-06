@@ -7,12 +7,11 @@ import Card from './Card.jsx';
 class CardSearch extends Component {
     state = {
         cardSearchResults:[],
-        cardName:'',
-        cardImage:'',
         searchResultPlaceholder:'Search for cards',
         inputCardName:'',
         status:null
     }
+
 
     findCardByName = cardName => {
         mtg.card
@@ -21,7 +20,6 @@ class CardSearch extends Component {
             // language: 'english'
         })
         .then(results => {
-            // console.log("These are the findCardByName results", results);
             if(results.length === 0) {
                 this.setState({
                     inputCardName:'',
@@ -64,6 +62,7 @@ class CardSearch extends Component {
     }
 
     render() {
+
         return (
             <>  
                 <section className="search-form">
@@ -101,10 +100,10 @@ class CardSearch extends Component {
                             </React.Fragment>
                         )
                     })}
-
                 </section>
             </>
         );
+
     }
 }
 

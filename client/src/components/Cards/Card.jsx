@@ -30,8 +30,7 @@ class Card extends Component {
         axios
         .post(`${process.env.REACT_APP_NODE_SERVER}/cards`, this.props.card)
         // .post("http://localhost:3333/cards", currentCard)
-        .then(response => {
-            console.log("addCard response:  ", response)
+        .then(() => {
 
             this.setState({
                 cardObject:this.props.card,

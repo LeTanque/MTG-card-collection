@@ -8,7 +8,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 0 20px;
-    margin-top: 10px;
+    margin-top: 20px;
     @include phone {
         padding: 0;
     }
@@ -38,25 +38,7 @@
             }
         }
     }
-    .card-button {
-        display: flex;
-        padding: 5px 0;
-        font-size: 2.5rem;
-        .button-heart {
-            color: $red;
-        }
-        .button-enlarge {
-            color: $gray;
-        }
-        svg {
-            margin-right: 10px;
-            border-radius: 5px;
-            &:hover, &:focus {
-                @include box-shadow($box-shadow-x: 1px, $box-shadow-y: 4px, $box-shadow-blur: 15px, $box-shadow-spread: 3px, $box-shadow-color: $white);
-                transition-duration: 0.75s;
-            }
-        }
-    }
+    
 }
 
 

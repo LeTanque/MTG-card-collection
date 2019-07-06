@@ -46,13 +46,23 @@
                 // @include font-shadow($font-shadow-x: 3px, $font-shadow-y: 8px, $font-shadow-blur: 12px, $font-shadow-color: $black);
             }
         }
-        .card-delete {
+        .modal-button {
             cursor: pointer;
             display: flex;
             justify-content: left;
             align-items: center;
             width: fit-content;
+            font-size: 1.6rem;
             padding: 10px 10px 10px 0;
+        }
+        .card-delete {
+            color: $red;
+            svg {
+                font-size: 2.8rem;
+            }
+        }
+        .card-add {
+            color: $green;
             svg {
                 font-size: 2.8rem;
             }

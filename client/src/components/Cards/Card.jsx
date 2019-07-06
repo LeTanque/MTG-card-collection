@@ -7,13 +7,7 @@ import React, { Component } from 'react';
 //     GoDiffAdded,
 //     GoLinkExternal
 // } from 'react-icons/go';
-import {
-    // FaHeart,
-    FaRegCheckSquare,
-} from 'react-icons/fa';
-import {
-    MdImage,
-} from 'react-icons/md';
+
 import axios from 'axios';
 import CardModal from './CardModal.jsx';
 
@@ -62,13 +56,6 @@ class Card extends Component {
         return "card"
     }
     
-    buttonShow = () => {
-        if (this.props.cardInCollection) {
-            return "display-none"
-        }
-        return "card-button"
-    }
-
     cardImage = () => {
         if(this.props.card.imageUrl) {
             return `https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${this.props.card.multiverseid}&type=card`
@@ -85,6 +72,7 @@ class Card extends Component {
                     cardImage={this.cardImage}
                     removeCardFromCollection={this.props.removeCardFromCollection}
                     cardInCollection={this.props.cardInCollection}
+                    addCardToCollection={this.addCardToCollection}
                 />
             )
         }
@@ -101,16 +89,6 @@ class Card extends Component {
                         />
                     </div>
 
-                    <div className={this.buttonShow()} >
-                        <FaRegCheckSquare 
-                            onClick={this.addCardToCollection} 
-                            className="button-heart" 
-                        />
-                        <MdImage 
-                            onClick={this.toggleCard} 
-                            className="button-enlarge" 
-                        />
-                    </div>
                 </section>
             </>
         );

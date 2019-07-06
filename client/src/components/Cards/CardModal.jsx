@@ -5,6 +5,11 @@ import {
     // GoDiffAdded,
     // GoLinkExternal
 } from 'react-icons/go';
+import {
+    // FaHeart,
+    FaRegCheckSquare,
+} from 'react-icons/fa';
+
 import { Keyrune } from "@saeris/react-keyrune";
 
 
@@ -59,16 +64,22 @@ const CardModal = props => {
                 </div>
 
                 <span 
-                    className={props.cardInCollection ? "card-delete" : "display-none"}
+                    className={props.cardInCollection ? "modal-button card-delete" : "display-none"}
                     onClick={() => props.removeCardFromCollection(props.card.id)} 
                 >
-                    <GoTrashcan /> &nbsp; Delete
+                    <GoTrashcan /> &nbsp; Remove from Collection
+                </span>
+                
+                <span 
+                    className={props.cardInCollection ? "display-none" : "modal-button card-add"} 
+                    onClick={props.addCardToCollection}
+                >
+                    <FaRegCheckSquare /> &nbsp; Add to Collection
                 </span>
             </section>
         </section>
     );
 }
-
 
 
 export default CardModal

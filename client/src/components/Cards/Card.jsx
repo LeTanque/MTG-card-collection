@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { 
     // GoPlus, 
     // GoHeart,
-    GoX,
+    // GoX,
     GoTrashcan,
     // GoDiffAdded,
     // GoLinkExternal
@@ -16,6 +16,7 @@ import {
 } from 'react-icons/md';
 import axios from 'axios';
 import { Keyrune } from "@saeris/react-keyrune";
+import CardModal from './CardModal.jsx';
 
 
 class Card extends Component {
@@ -24,22 +25,10 @@ class Card extends Component {
         cardModal:false,
     }
 
-    // componentDidMount() {
-    //     this.setState({
-    //         status:this.props.status
-    //     })
-    // }
 
     addCardToCollection = () => {
-        console.log("process env", process.env);
-        console.log("this props card", this.props.card)
-        const currentCard = this.props.card
-        console.log(currentCard)
-        // axios({
-        //     method: 'post',
-        //     url: 'http://localhost:3333/cards',
-        //     data: currentCard
-        // })
+        // console.log("process env", process.env);
+        // console.log("this props card", this.props.card)
         axios
         .post(`${process.env.REACT_APP_NODE_SERVER}/cards`, this.props.card)
         // .post("http://localhost:3333/cards", currentCard)
@@ -96,91 +85,85 @@ class Card extends Component {
         return "display-none"
     }
 
+    cardImage = () => {
+        if(this.props.card.imageUrl) {
+            return `https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${this.props.card.multiverseid}&type=card`
+        }
+        return `https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card`
+    }
+
     render () {
         if(this.state.cardModal) {
             return (
-                <section className="card-modal" onClick={this.toggleCard}>
-                    <GoX className="modal-close" />
-                    <img 
-                        src={this.props.card.imageUrl} 
-                        alt={this.props.card.name}  
-                    />
-                </section>
+                <CardModal 
+                    toggleCard={this.toggleCard}
+                    card={this.props.card}
+                    cardImage={this.cardImage}
+                />
             )
         }
-        if(this.props.card.imageUrl) {
-            return (
-                <>
-                    <section className={this.cardSize()}>
-                        <div className="card-img-container">
-                            <img 
-                                // src={this.props.card.imageUrl} 
-                                src={`https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${this.props.card.multiverseid}&type=card`}
-                                alt={this.props.card.name}  
-                                
-                            />
-                        </div>
-                        <div className={this.collectionView()}>
-                            <h4>
-                                {this.props.card.name}
-                            </h4>
+        return (
+            <>
+                <section className={this.cardSize()}>
+                    <div className="card-img-container">
+                        <img 
+                            // src={this.props.card.imageUrl} 
+                            src={this.cardImage()}
+                            alt={this.props.card.name}  
                             
-                            <div>
-                                {this.props.card.type}
-                            </div>
-
-                            <div className={this.props.card.text ? null : "display-none"}>
-                                {this.props.card.text}
-                            </div>
-                            
-                            <div className={this.props.card.flavor ? "italic" : "display-none"}>
-                                {this.props.card.flavor}
-                            </div>
-                            
-                            <Keyrune 
-                                // gradient 
-                                // foil
-                                fixed
-                                set={this.lowerCaseThis(this.props.card.set)}
-                                rarity={this.lowerCaseThis(this.props.card.rarity)} 
-                                size="2x"
-                                className="set-icon"
-                            />
-                            <div className="bold">
-                                {this.props.card.setName}
-                            </div>
-
-                            <div className="card-delete">
-                                <GoTrashcan 
-                                    onClick={() => this.props.removeCardFromCollection(this.props.card.multiverseid)} 
-                                />
-                            </div>
-
+                        />
+                    </div>
+                    <div className={this.collectionView()}>
+                        <h4>
+                            {this.props.card.name}
+                        </h4>
+                        
+                        <div>
+                            {this.props.card.type}
                         </div>
 
-                        <div className={this.buttonShow()} >
-                            <FaRegCheckSquare 
-                                onClick={this.addCardToCollection} 
-                                className="button-heart" 
-                            />
-                            <MdImage 
-                                onClick={this.toggleCard} 
-                                className="button-enlarge" 
+                        <div className={this.props.card.text ? null : "display-none"}>
+                            {this.props.card.text}
+                        </div>
+                        
+                        <div className={this.props.card.flavor ? "italic" : "display-none"}>
+                            {this.props.card.flavor}
+                        </div>
+                        
+                        <Keyrune 
+                            // gradient 
+                            // foil
+                            fixed
+                            set={this.lowerCaseThis(this.props.card.set)}
+                            rarity={this.lowerCaseThis(this.props.card.rarity)} 
+                            size="2x"
+                            className="set-icon"
+                        />
+                        <div className="bold">
+                            {this.props.card.setName}
+                        </div>
+
+                        <div className="card-delete">
+                            <GoTrashcan 
+                                onClick={() => this.props.removeCardFromCollection(this.props.card.multiverseid)} 
                             />
                         </div>
 
-                    </section>
+                    </div>
 
-
-
-                </>
-            );
-        }
-        else {
-            return (
-                <></>
-            );
-        }
+                    <div className={this.buttonShow()} >
+                        <FaRegCheckSquare 
+                            onClick={this.addCardToCollection} 
+                            className="button-heart" 
+                        />
+                        <MdImage 
+                            onClick={this.toggleCard} 
+                            className="button-enlarge" 
+                        />
+                    </div>
+                </section>
+            </>
+        );
     }
 }
 

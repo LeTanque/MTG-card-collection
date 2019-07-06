@@ -22,35 +22,42 @@ class Card extends Component {
     state = {
         cardObject:{},
         cardModal:false,
-        status:null
     }
 
-    componentDidMount() {
-        this.setState({
-            status:this.props.status
-        })
-    }
+    // componentDidMount() {
+    //     this.setState({
+    //         status:this.props.status
+    //     })
+    // }
 
     addCardToCollection = () => {
+        console.log("process env", process.env);
+        console.log("this props card", this.props.card)
+        const currentCard = this.props.card
+        console.log(currentCard)
+        // axios({
+        //     method: 'post',
+        //     url: 'http://localhost:3333/cards',
+        //     data: currentCard
+        // })
         axios
-        .post(`${process.env.REACT_APP_DB_BASE}/cards`, this.props.card)
-        // .post(`http://localhost:3333/cards`, this.props.card)
+        .post(`${process.env.REACT_APP_NODE_SERVER}/cards`, this.props.card)
+        // .post("http://localhost:3333/cards", currentCard)
         .then(response => {
-            // console.log("addCard response:  ", response)
-            const statusUpdate = `Added ${this.props.card.name} to your collection!`
+            console.log("addCard response:  ", response)
+
             this.setState({
                 cardObject:this.props.card,
-                cardModal:false,
-                status:statusUpdate
+                cardModal:false
             })
+            
+            const statusUpdate = `Added ${this.props.card.name} to your collection!`
             this.props.statusCheck(statusUpdate)
         })
         .catch(error => {
-            // console.log("addCard error:  ", error)
+            console.log("addCard error:  ", error)
+
             const statusUpdate = `Error adding ${this.props.card.name}!`
-            this.setState({
-                status:statusUpdate
-            })
             this.props.statusCheck(statusUpdate)
         })
     }

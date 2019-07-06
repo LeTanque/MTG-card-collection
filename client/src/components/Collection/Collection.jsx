@@ -13,10 +13,10 @@ class Collection extends Component {
 
     componentDidMount() {
         axios
-        .get(`${process.env.REACT_APP_DB_BASE}/cards`)
-        // .get("http://localhost:3333/cards")
+        .get(`${process.env.REACT_APP_NODE_SERVER}/cards`)
         .then(results=>{
-            // console.log("Collection CDM results: ", results)
+            console.log("Collection CDM results: ", results)
+            console.log("React app node server base: ", process.env.REACT_APP_NODE_SERVER)
             if(results.length === 0) {
                 this.setState({
                     inputCardName:'',
@@ -35,7 +35,7 @@ class Collection extends Component {
 
     removeCardFromCollection = cardMultiId => {
         axios
-        .delete(`${process.env.REACT_APP_DB_BASE}/cards/${cardMultiId}`) // Production call
+        .delete(`${process.env.REACT_APP_NODE_SERVER}/cards/${cardMultiId}`) // Production call
         // .delete(`http://localhost:3333/cards/${cardMultiId}`) // Dev call
         .then(response => {
             // console.log("remove response", response.data.card)

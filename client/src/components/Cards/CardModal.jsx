@@ -18,6 +18,11 @@ const CardModal = props => {
                 src={props.cardImage()}
                 alt={props.card.name}  
             />
+            <section className="modal-card-info">
+                <h5>{props.card.name}</h5>
+                <p>{props.card.type}</p>
+                <p>{props.card.text}</p>
+            </section>
         </section>
     );
 }

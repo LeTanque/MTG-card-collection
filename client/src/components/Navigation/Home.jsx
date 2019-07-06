@@ -40,12 +40,12 @@ class Home extends Component {
         const bgCard = {
             WebkitTransition: 'all', // note the capital 'W' here
             msTransition: 'all', // 'ms' is the only lowercase vendor prefix
-            backgroundImage: 'url(' + this.props.randomCardImageUrl + ')',
+            backgroundImage: 'url(' + this.props.randomCardImage + ')',
             // backgroundSize: `${this.state.bgSize}%`,
             // backgroundPositionX: `${this.state.cursorX}px`,
         };
 
-        if (!this.props.randomCardImageUrl) {
+        if (!this.props.randomCardImage) {
             return (
                 <Fragment>
                     <section className="loader">

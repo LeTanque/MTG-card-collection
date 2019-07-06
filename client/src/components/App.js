@@ -45,13 +45,13 @@ function sortingHat(key, order='asc') {
 class App extends Component {
   state = {
     // baseURL:`https://api.magicthegathering.io/v1/cards?page=1&pageSize=50`,
+    // randomPackUrlRNA:`https://api.magicthegathering.io/v1/sets/rna/booster`,
     cardsURL:`/cards?page=`,
     cardsPageNumber:`1`,
     getAllTheSets: `https://api.magicthegathering.io/v1/sets`,
     allTheSets: null,
-    // randomPackUrlRNA:`https://api.magicthegathering.io/v1/sets/rna/booster`,
-    randomCardUrl:`https://api.magicthegathering.io/v1/cards/${getRandomNumber(1, 1000)}`,
-    randomCard:{},
+    randomCardImageUrl:`https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${getRandomNumber(1, 1000)}&type=card`,
+    randomCardImage:'',
     sampleCard:{
       name:"Plains",
       cmc:0,
@@ -65,10 +65,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getCard(this.state.randomCardUrl);
-    // this.getCards(this.state.baseURL + this.state.cardsURL + this.state.cardsPageNumber);
-    // console.log(this.state.randomCardUrl)
-    // this.getCardsSDK()
+    this.getCard(this.state.randomCardImageUrl);
+  }
+
+  getCard = URL => {
+    this.setState({ randomCardImage:URL })
   }
 
   // This method retrieves a random pack of cards
@@ -92,23 +93,6 @@ class App extends Component {
     });
   };
 
-  // This method triggers the above method when we click on the open pack button
-  // openPackOfCards = setId => {
-  //   this.getPackOfCards(setId);
-  // }
-
-  getCard = URL => {
-    fetch(URL)
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      this.setState({ randomCard:data.card })
-    })
-    .catch(err => {
-      throw new Error(err);
-    })
-  }
 
   getAllTheSets = () => {
     fetch(this.state.getAllTheSets)
@@ -119,31 +103,6 @@ class App extends Component {
       this.setState({ allTheSets: response.sets.sort(sortingHat('releaseDate', 'desc')) })
     })
     .catch(error => {console.log("getAllTheSets error", error)})
-  }
-
-  getCardsSDK = () => {
-  //   mtg.card  // This is basically the same thing as the fetch, only it uses the mtg sdk imported aboves
-  //   .all({
-  //     types: 'creature',
-  //     colors: 'black',
-  //     page: 100,
-  //     pageSize: 3
-  //   })
-  //   .on('data', card => {
-  //     console.log(card)
-  //   })
-  //   // .where({
-  //   //   page:50,
-  //   //   pageSize:50,
-  //   //   set:"5ED",
-  //   //   reserved: true
-  //   // })
-  //   // .then(cards => {
-  //   //   const cardsWithImage = cards.filter(card => card.imageUrl); // Remove any cards that don't have an imageUrl
-  //   //   this.setState({
-  //   //     allCards:cardsWithImage
-  //   //   })
-  //   // })
   }
 
 
@@ -159,7 +118,7 @@ class App extends Component {
           render={() => (
             <Home 
               randomCard={this.state.randomCard}
-              randomCardImageUrl={this.state.randomCard.imageUrl}
+              randomCardImage={this.state.randomCardImage}
             />
           )}
         />
@@ -179,8 +138,6 @@ class App extends Component {
             <RandomPack 
               allCards={this.state.allCards} 
               getPackOfCards={this.getPackOfCards}
-              // getCardsSDK={this.getCardsSDK}
-              // goToNextPage={this.goToNextPage}
             />
           )}
         />
@@ -189,7 +146,6 @@ class App extends Component {
           path='/card-search'
           render={() => (
             <CardSearch 
-
             />
           )}
         />

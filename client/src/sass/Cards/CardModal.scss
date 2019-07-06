@@ -5,6 +5,7 @@
     width: 100vw;
     top: 0;
     display: flex;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
     z-index: 100;
@@ -16,11 +17,49 @@
         right: 10px;
     }
     img {
-        max-width: max-content;
-        max-height: max-content;
+        max-width: 275px;
+        width: 100%;
         border-radius: 14px;
     }
     .modal-card-info {
-        max-width: 300px;
+        max-width: 350px;
+        margin: 0 30px;
+        h4 {
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.6rem;
+            margin: 10px 0;
+            line-height: 1;
+        }
+        p.italic {
+            font-size: 1.4rem;
+        }
+        .set-icon-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin: 30px 0;
+            .set-icon {
+                margin: 15px 0 -5px 0;
+                // @include font-shadow($font-shadow-x: 3px, $font-shadow-y: 8px, $font-shadow-blur: 12px, $font-shadow-color: $black);
+            }
+        }
+        .card-delete {
+            cursor: pointer;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            width: fit-content;
+            padding: 10px 10px 10px 0;
+            svg {
+                font-size: 2.8rem;
+            }
+        }
     }
 }
+.card-details {
+    max-width: 100%;
+}
+

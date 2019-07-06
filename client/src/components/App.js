@@ -61,7 +61,8 @@ class App extends Component {
       imageUrl:"https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=8374&type=card" 
     },
     allCards:null,
-    location:`rna`
+    location:`rna`,
+    status:null
   }
 
   componentDidMount() {
@@ -77,20 +78,22 @@ class App extends Component {
     // At a high level we are calling an API to fetch some mtg card data.
     // We then take that data and set it to our state.
     const URL = `https://api.magicthegathering.io/v1/sets/${setId}/booster`;
-    // console.log("getPackOfCards launched")
     fetch(URL)
-    .then(res => {
-      // console.log(res);
-      return res.json();
+    .then(response => {
+      return response.json();
     })
     .then(data => {
-      // console.log("this is the API data", data);
+      if(data.cards.length === 0) {
+        return console.log(data)
+      }
       const cardsWithImage = data.cards.filter(card => card.imageUrl);
-      this.setState({ allCards:cardsWithImage });
+      this.setState({ 
+        allCards:cardsWithImage
+      })
     })
-    .catch(err => {
-      throw new Error(err);
-    });
+    .catch(error => {
+      console.log("getRandomPack error", error)
+    })
   };
 
 
@@ -100,14 +103,17 @@ class App extends Component {
       return response.json()
     })
     .then(response => {
-      this.setState({ allTheSets: response.sets.sort(sortingHat('releaseDate', 'desc')) })
+      this.setState({ 
+        allTheSets: response.sets.sort(sortingHat('releaseDate', 'desc')) 
+      })
     })
-    .catch(error => {console.log("getAllTheSets error", error)})
+    .catch(error => {
+      console.log("getAllTheSets error", error)
+    })
   }
 
 
   render() {
-    // console.log("App state allCards", this.state.allCards)
     return (
       <BrowserRouter>
         <NavBar />
@@ -138,6 +144,7 @@ class App extends Component {
             <RandomPack 
               allCards={this.state.allCards} 
               getPackOfCards={this.getPackOfCards}
+              status={this.state.status}
             />
           )}
         />

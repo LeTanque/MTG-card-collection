@@ -18,22 +18,22 @@ class Pack extends React.Component {
     render() {
         if(!this.props.allCards) {
             return (
-                <Fragment>
+                <>
                     <section className="loader">
                         Open a new pack!
                     </section>
-                </Fragment>
+                </>
             )
         }
 
         else if(this.props.allCards.length === 0) {
             return (
-                <Fragment>
+                <>
                     <section className="loader">
                         <Loader  type="Grid" color="#ffffff" height={80} width={80} />
                         <code>Loading...</code>
                     </section>
-                </Fragment>
+                </>
             )
         }
 

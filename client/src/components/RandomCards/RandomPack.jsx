@@ -66,6 +66,7 @@ const RandomPack = props => {
             </section>
             <Pack 
                 allCards={props.allCards}
+                status={props.status}
             />
         </>
     )

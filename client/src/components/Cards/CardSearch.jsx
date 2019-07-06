@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import mtg from 'mtgsdk';
-// import axios from 'axios';
 import Card from './Card.jsx';
 
 

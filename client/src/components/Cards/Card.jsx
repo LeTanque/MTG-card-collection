@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { 
-    // GoPlus, 
-    // GoHeart,
-    // GoX,
-    GoTrashcan,
-    // GoDiffAdded,
-    // GoLinkExternal
-} from 'react-icons/go';
+// import { 
+//     GoPlus, 
+//     GoHeart,
+//     GoX,
+//     GoTrashcan,
+//     GoDiffAdded,
+//     GoLinkExternal
+// } from 'react-icons/go';
 import {
     // FaHeart,
     FaRegCheckSquare,
@@ -15,8 +15,9 @@ import {
     MdImage,
 } from 'react-icons/md';
 import axios from 'axios';
-import { Keyrune } from "@saeris/react-keyrune";
 import CardModal from './CardModal.jsx';
+
+
 
 
 class Card extends Component {
@@ -48,13 +49,6 @@ class Card extends Component {
         })
     }
 
-    lowerCaseThis = thing => {
-        if(thing) {
-            return thing.toLowerCase()
-        }
-        return null
-    }
-
     toggleCard = () => {
         this.setState({
             cardModal: !this.state.cardModal
@@ -75,13 +69,6 @@ class Card extends Component {
         return "card-button"
     }
 
-    collectionView = () => {
-        if (this.props.cardInCollection) {
-            return "card-details"
-        }
-        return "display-none"
-    }
-
     cardImage = () => {
         if(this.props.card.imageUrl) {
             return `https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${this.props.card.multiverseid}&type=card`
@@ -96,56 +83,22 @@ class Card extends Component {
                     toggleCard={this.toggleCard}
                     card={this.props.card}
                     cardImage={this.cardImage}
+                    removeCardFromCollection={this.props.removeCardFromCollection}
+                    cardInCollection={this.props.cardInCollection}
                 />
             )
         }
         return (
             <>
                 <section className={this.cardSize()}>
+
                     <div className="card-img-container">
                         <img 
-                            // src={this.props.card.imageUrl} 
                             src={this.cardImage()}
-                            alt={this.props.card.name}  
+                            alt={this.props.card.name}
+                            onClick={this.toggleCard}
                             
                         />
-                    </div>
-                    <div className={this.collectionView()}>
-                        <h4>
-                            {this.props.card.name}
-                        </h4>
-                        
-                        <div>
-                            {this.props.card.type}
-                        </div>
-
-                        <div className={this.props.card.text ? null : "display-none"}>
-                            {this.props.card.text}
-                        </div>
-                        
-                        <div className={this.props.card.flavor ? "italic" : "display-none"}>
-                            {this.props.card.flavor}
-                        </div>
-                        
-                        <Keyrune 
-                            // gradient 
-                            // foil
-                            fixed
-                            set={this.lowerCaseThis(this.props.card.set)}
-                            rarity={this.lowerCaseThis(this.props.card.rarity)} 
-                            size="2x"
-                            className="set-icon"
-                        />
-                        <div className="bold">
-                            {this.props.card.setName}
-                        </div>
-
-                        <div className="card-delete">
-                            <GoTrashcan 
-                                onClick={() => this.props.removeCardFromCollection(this.props.card.id)} 
-                            />
-                        </div>
-
                     </div>
 
                     <div className={this.buttonShow()} >

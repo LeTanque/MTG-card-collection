@@ -12,16 +12,22 @@ const RandomPack = props => {
                     <div className="nav-icon">
                         <div>
                             <button
-                                onClick={() => props.getPackOfCards("rna")}
+                                onClick={() => props.getPackOfCards("m20")}
                                 className="btn-red"
                             >
-                                Ravnica Allegiance
+                                Core 2020
                             </button>
                             <button
                                 onClick={() => props.getPackOfCards("war")}
                                 className="btn-red"
                             >
                                 War of the Spark
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("rna")}
+                                className="btn-red"
+                            >
+                                Ravnica Allegiance
                             </button>
                             <button
                                 onClick={() => props.getPackOfCards("grn")}

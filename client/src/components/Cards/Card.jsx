@@ -27,8 +27,6 @@ class Card extends Component {
 
 
     addCardToCollection = () => {
-        // console.log("process env", process.env);
-        // console.log("this props card", this.props.card)
         axios
         .post(`${process.env.REACT_APP_NODE_SERVER}/cards`, this.props.card)
         // .post("http://localhost:3333/cards", currentCard)

@@ -145,7 +145,7 @@ class Card extends Component {
 
                         <div className="card-delete">
                             <GoTrashcan 
-                                onClick={() => this.props.removeCardFromCollection(this.props.card.multiverseid)} 
+                                onClick={() => this.props.removeCardFromCollection(this.props.card.id)} 
                             />
                         </div>
 

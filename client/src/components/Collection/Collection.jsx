@@ -33,13 +33,13 @@ class Collection extends Component {
         .catch(error=>console.log(error))
     }
 
-    removeCardFromCollection = cardMultiId => {
+    removeCardFromCollection = cardId => {
         axios
-        .delete(`${process.env.REACT_APP_NODE_SERVER}/cards/${cardMultiId}`) // Production call
-        // .delete(`http://localhost:3333/cards/${cardMultiId}`) // Dev call
+        .delete(`${process.env.REACT_APP_NODE_SERVER}/cards/${cardId}`) // Production call
+        // .delete(`http://localhost:3333/cards/${cardId}`) // Dev call
         .then(response => {
             // console.log("remove response", response.data.card)
-            const newCollection = this.state.collection.filter(card => card.multiverseid !== response.data.card.multiverseid)
+            const newCollection = this.state.collection.filter(card => card.id !== response.data.card.id)
             this.setState({
                 collectionResultPlaceholder:`Removed ${response.data.card.name}`,
                 collection:[...newCollection],

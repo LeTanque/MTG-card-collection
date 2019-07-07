@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Card from '../Cards/Card.jsx';
+import CardStatus from '../Cards/CardStatus.jsx';
 
 
 class Collection extends Component {
@@ -8,14 +9,12 @@ class Collection extends Component {
         collection: [],
         collectionResultPlaceholder:"Collection loading",
         cardInCollection: true,
-        status: null
     }
 
     componentDidMount() {
         axios
         .get(`${process.env.REACT_APP_NODE_SERVER}/cards`)
         .then(results=>{
-            // console.log("Collection CDM results: ", results)
             if(results.length === 0) {
                 this.setState({
                     inputCardName:'',
@@ -35,13 +34,14 @@ class Collection extends Component {
     removeCardFromCollection = cardId => {
         axios
         .delete(`${process.env.REACT_APP_NODE_SERVER}/cards/${cardId}`) // Production call
-        // .delete(`http://localhost:3333/cards/${cardId}`) // Dev call
         .then(response => {
             const newCollection = this.state.collection.filter(card => card.id !== response.data.card.id)
+            const collectionCount = this.state.collection.length
             this.setState({
-                collectionResultPlaceholder:`Removed ${response.data.card.name}`,
-                collection:[...newCollection],
+                collectionResultPlaceholder:`${collectionCount} cards in collection`,
+                collection:[...newCollection]
             })
+            this.props.statusCheck(`Removed ${response.data.card.name}`)
         })
         .catch(error => console.log(error))
     }
@@ -54,6 +54,8 @@ class Collection extends Component {
                     {this.state.collectionResultPlaceholder}
                 </div>
 
+                <CardStatus status={this.props.status} />
+
                 {this.state.collection.map(card => (
                     <React.Fragment key={card.id}>
                         <Card 
@@ -63,7 +65,6 @@ class Collection extends Component {
                         />
                     </React.Fragment>
                 ))}
-
 
             </section>
         );

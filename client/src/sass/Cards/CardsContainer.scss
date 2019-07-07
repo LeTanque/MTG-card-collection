@@ -3,6 +3,19 @@
     display: flex;
 }
 
+.loader {
+    color: $gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 25vh;
+    code {
+        padding: 20px 0;
+    }
+}
+
 .cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -18,13 +31,6 @@
         margin: 0 auto 10px auto;
         text-align: center;
     }
-    .card-action-status {
-        position: fixed;
-        bottom: 50px;
-        background-color: $dark-gray;
-        padding: 10px 20px;
-        z-index: 50;
-    }
     .card {
         padding: 10px;
         img {
@@ -38,7 +44,6 @@
             }
         }
     }
-    
 }
 
 

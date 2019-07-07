@@ -1,10 +1,10 @@
 import React from 'react'
 import Pack from '../Cards/Pack.jsx';
+import CardStatus from '../Cards/CardStatus.jsx';
 
 
 
 const RandomPack = props => {
-
     return (
         <>
             <section className="cards-nav">
@@ -66,6 +66,9 @@ const RandomPack = props => {
             </section>
             <Pack 
                 allCards={props.allCards}
+                statusCheck={props.statusCheck}
+            />
+            <CardStatus 
                 status={props.status}
             />
         </>

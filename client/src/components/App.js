@@ -46,35 +46,42 @@ class App extends Component {
   state = {
     // baseURL:`https://api.magicthegathering.io/v1/cards?page=1&pageSize=50`,
     // randomPackUrlRNA:`https://api.magicthegathering.io/v1/sets/rna/booster`,
-    cardsURL:`/cards?page=`,
+    // cardsURL:`/cards?page=`,
     cardsPageNumber:`1`,
-    getAllTheSets: `https://api.magicthegathering.io/v1/sets`,
-    allTheSets: null,
+    location:`rna`,
     randomCardImageUrl:`https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${getRandomNumber(1, 1000)}&type=card`,
     randomCardImage:'',
-    sampleCard:{
-      name:"Plains",
-      cmc:0,
-      colors:[], 
-      colorIdentity:["white"], 
-      type:"Basic Land — Plains",
-      imageUrl:"https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=8374&type=card" 
-    },
+    getAllTheSets: `https://api.magicthegathering.io/v1/sets`,
+    allTheSets: null,
     allCards:null,
-    location:`rna`,
     status:null
   }
 
   componentDidMount() {
     this.getCard(this.state.randomCardImageUrl);
+    this.clearStatus()
   }
 
   getCard = URL => {
     this.setState({ randomCardImage:URL })
   }
 
+  clearStatus = () => {
+    setInterval(() => {
+        this.setState({
+          status:null
+        })
+    }, 5000);
+  }
+
+
+
   // This method retrieves a random pack of cards
   getPackOfCards = setId => {
+    this.setState({
+      allCards:null,
+      status:"Opening pack..."
+    })
     // At a high level we are calling an API to fetch some mtg card data.
     // We then take that data and set it to our state.
     const URL = `https://api.magicthegathering.io/v1/sets/${setId}/booster`;
@@ -83,18 +90,28 @@ class App extends Component {
       return response.json();
     })
     .then(data => {
-      if(data.cards.length === 0) {
-        return console.log(data)
-      }
-      const cardsWithImage = data.cards.filter(card => card.imageUrl);
+      this.setState({
+        allCards:null,
+        status:`${data.cards.length} cards in pack`
+      })
+      this.checkPackOfCards(data.cards)
+    })
+    .catch(error => console.log("getRandomPack error", error))
+  };
+  
+  checkPackOfCards = rawPackOfCards => {
+    if(rawPackOfCards) {
+      const cardsWithImage = rawPackOfCards.filter(card => card.imageUrl);
       this.setState({ 
         allCards:cardsWithImage
+      });
+    } else {
+      this.setState({
+        status:"No cards in pack! Try another set."
       })
-    })
-    .catch(error => {
-      console.log("getRandomPack error", error)
-    })
-  };
+    }
+  }
+
 
 
   getAllTheSets = () => {
@@ -107,8 +124,13 @@ class App extends Component {
         allTheSets: response.sets.sort(sortingHat('releaseDate', 'desc')) 
       })
     })
-    .catch(error => {
-      console.log("getAllTheSets error", error)
+    .catch(error => console.log("getAllTheSets error", error))
+  };
+
+
+  statusCheck = status => {
+    this.setState({
+        status:status
     })
   }
 
@@ -133,7 +155,7 @@ class App extends Component {
           path='/random-card'
           render={() => (
             <RandomCard 
-            randomCard={this.state.randomCard}
+              randomCard={this.state.randomCard}
             />
             )}
         />
@@ -145,6 +167,7 @@ class App extends Component {
               allCards={this.state.allCards} 
               getPackOfCards={this.getPackOfCards}
               status={this.state.status}
+              statusCheck={this.statusCheck}
             />
           )}
         />
@@ -153,6 +176,8 @@ class App extends Component {
           path='/card-search'
           render={() => (
             <CardSearch 
+              statusCheck={this.statusCheck}
+              status={this.state.status}
             />
           )}
         />
@@ -171,7 +196,8 @@ class App extends Component {
           path='/collection'
           render={() => (
             <Collection 
-
+              statusCheck={this.statusCheck}
+              status={this.state.status}
             />
           )}
         />

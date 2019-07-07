@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import Card from './Card.jsx';
+import CardStatus from './CardStatus.jsx';
 import Loader from 'react-loader-spinner';
 
 
@@ -9,11 +10,7 @@ class Pack extends React.Component {
         status:null
     }
 
-    statusCheck = status => {
-        this.setState({
-            status:status
-        })
-    }
+
 
     render() {
         if(!this.props.allCards) {
@@ -41,20 +38,16 @@ class Pack extends React.Component {
             <>
                 <section className="cards-container">
 
-                    <span className={this.state.status === null ? "display-none" : "card-action-status"}>
-                        {this.state.status}
-                    </span>
+                    {this.props.status ? (<CardStatus status={this.props.status} />) : null}
 
-                    {this.props.allCards.map(eachCard => 
-                        (
-                            <Fragment key={eachCard.id}>
-                                <Card 
-                                    card={eachCard}
-                                    statusCheck={this.statusCheck}
-                                />
-                            </Fragment>
-                        ))
-                    }
+                    {this.props.allCards.map(eachCard => (
+                        <Fragment key={eachCard.id}>
+                            <Card 
+                                card={eachCard}
+                                statusCheck={this.props.statusCheck}
+                            />
+                        </Fragment>
+                    ))}
                 </section>
             </>
         );

@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import mtg from 'mtgsdk';
 import Card from './Card.jsx';
+import CardStatus from './CardStatus.jsx';
+
 
 
 class CardSearch extends Component {
@@ -10,7 +12,6 @@ class CardSearch extends Component {
         inputCardName:'',
         status:null
     }
-
 
     findCardByName = cardName => {
         mtg.card
@@ -39,6 +40,7 @@ class CardSearch extends Component {
             }
         })
     }
+    
 
     handleChanges = event => {
         this.setState({
@@ -54,14 +56,7 @@ class CardSearch extends Component {
         this.findCardByName(this.state.inputCardName);
     }
 
-    statusCheck = status => {
-        this.setState({
-            status:status
-        })
-    }
-
     render() {
-
         return (
             <>  
                 <section className="search-form">
@@ -84,25 +79,22 @@ class CardSearch extends Component {
                         {this.state.searchResultPlaceholder}
                     </div>
                     
-                    <span className={this.state.status === null ? "display-none" : "card-action-status"}>
-                        {this.state.status}
-                    </span>
+                    {this.props.status ? (<CardStatus status={this.props.status} />) : null}
 
                     {this.state.cardSearchResults.map(card => {
                         return (
-                            <React.Fragment key={card.id}>
+                            <Fragment key={card.id}>
                                 <Card 
                                     card={card}
-                                    status={this.state.status}
-                                    statusCheck={this.statusCheck}
+                                    status={this.props.status}
+                                    statusCheck={this.props.statusCheck}
                                 />
-                            </React.Fragment>
+                            </Fragment>
                         )
                     })}
                 </section>
             </>
         );
-
     }
 }
 

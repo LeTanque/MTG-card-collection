@@ -1,0 +1,13 @@
+
+.card-status-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .card-action-status {
+        position: fixed;
+        bottom: 50px;
+        background-color: $dark-gray;
+        padding: 10px 20px;
+        z-index: 50;
+    }
+}

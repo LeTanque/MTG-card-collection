@@ -13,7 +13,7 @@ class Collection extends Component {
 
     componentDidMount() {
         axios
-        .get(`${process.env.REACT_APP_NODE_SERVER}/cards`)
+        .get(`${process.env.REACT_APP_HEROKU_ADDRESS}/cards`)
         .then(results=>{
             if(results.length === 0) {
                 this.setState({
@@ -33,7 +33,7 @@ class Collection extends Component {
 
     removeCardFromCollection = cardId => {
         axios
-        .delete(`${process.env.REACT_APP_NODE_SERVER}/cards/${cardId}`) // Production call
+        .delete(`${process.env.REACT_APP_HEROKU_ADDRESS}/cards/${cardId}`) // Production call
         .then(response => {
             const newCollection = this.state.collection.filter(card => card.id !== response.data.card.id)
             const collectionCount = this.state.collection.length
@@ -47,6 +47,7 @@ class Collection extends Component {
     }
 
     render() {
+        // console.log("process.env server variable: ",process.env.REACT_APP_HEROKU_ADDRESS)
         return (
             <section className="cards-container collection">
                 

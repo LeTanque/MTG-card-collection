@@ -44,9 +44,6 @@ function sortingHat(key, order='asc') {
 
 class App extends Component {
   state = {
-    // baseURL:`https://api.magicthegathering.io/v1/cards?page=1&pageSize=50`,
-    // randomPackUrlRNA:`https://api.magicthegathering.io/v1/sets/rna/booster`,
-    // cardsURL:`/cards?page=`,
     cardsPageNumber:`1`,
     location:`rna`,
     randomCardImageUrl:`https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${getRandomNumber(1, 1000)}&type=card`,

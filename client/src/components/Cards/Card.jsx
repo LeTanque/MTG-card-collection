@@ -1,12 +1,4 @@
 import React, { Component } from 'react';
-// import { 
-//     GoPlus, 
-//     GoHeart,
-//     GoX,
-//     GoTrashcan,
-//     GoDiffAdded,
-//     GoLinkExternal
-// } from 'react-icons/go';
 
 import axios from 'axios';
 import CardModal from './CardModal.jsx';
@@ -23,7 +15,7 @@ class Card extends Component {
 
     addCardToCollection = () => {
         axios
-        .post(`${process.env.REACT_APP_NODE_SERVER}/cards`, this.props.card)
+        .post(`${process.env.REACT_APP_HEROKU_ADDRESS}/cards`, this.props.card)
         // .post("http://localhost:3333/cards", currentCard)
         .then(() => {
 

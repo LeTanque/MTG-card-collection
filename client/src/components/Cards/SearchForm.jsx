@@ -5,11 +5,11 @@ import { Mana } from "@saeris/react-mana"
 class SearchForm extends React.Component {
     state = {
         searchVarShow:[
-            { id:0, searchOption:'type', value:'', show:false },
-            { id:1, searchOption:'subtypes', value:'', show:false },
-            { id:2, searchOption:'set', value:'', show:false },
-            { id:3, searchOption:'colors', value:'', show:false },
-            { id:4, searchOption:'name', value:'', show:false },
+            { id:0, searchOption:'type', optionValues:'', show:false },
+            { id:1, searchOption:'subtypes', optionValues:'', show:false },
+            { id:2, searchOption:'set', optionValues:'', show:false },
+            { id:3, searchOption:'colors', optionValues:'', show:false },
+            { id:4, searchOption:'name', optionValues:'', show:false },
         ],
         searchParams:{
             name:'',
@@ -21,13 +21,15 @@ class SearchForm extends React.Component {
     }
 
 
+
     showMenu = (event, varObject) => {
         event.preventDefault();
         const searchVarShowMinusTarget = this.state.searchVarShow.filter(element => element.searchOption !== varObject.searchOption)
         searchVarShowMinusTarget.forEach(element => element.show = false);
+
         const newSearchVarShow = [
             ...searchVarShowMinusTarget,
-            { id:varObject.id, searchOption:varObject.searchOption, value:'', show:true }
+            { id:varObject.id, searchOption:varObject.searchOption, optionValues:'', show:true }
         ]
         newSearchVarShow.sort(this.props.sortingHat('id', 'asc'));
         this.setState({
@@ -53,7 +55,7 @@ class SearchForm extends React.Component {
 
     
     render() {
-
+        console.log("this.state.type:  ",this.props.type)
         return (
             <section className="search-form">
                 <form 

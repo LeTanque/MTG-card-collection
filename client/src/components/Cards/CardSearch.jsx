@@ -13,13 +13,6 @@ class CardSearch extends Component {
         cardsWithPictures:[],
         searchResultPlaceholder:'Search for cards',
         nameInput:'',
-        // cardSearchVars:[            
-        //     {id:0, cardParam:'type', value:'', show:false},
-        //     {id:1, cardParam:'subtypes', value:'', show:false},
-        //     {id:2, cardParam:'set', value:'', show:false},
-        //     {id:3, cardParam:'colors', value:'', show:false},
-        //     {id:4, cardParam:'name', value:'', show:false},
-        // ],
         resultsPage:'',
         status:null
     }
@@ -96,6 +89,7 @@ class CardSearch extends Component {
                 <SearchForm 
                     submitSearch={this.submitSearch}
                     sortingHat={this.props.sortingHat}
+                    type={this.props.allTheTypes}
                 />
 
                 <section className="cards-container">

@@ -1,7 +1,9 @@
 import React, { Fragment, Component } from 'react';
 import mtg from 'mtgsdk';
+
 import Card from './Card.jsx';
 import CardStatus from './CardStatus.jsx';
+import SearchForm from './SearchForm.jsx';
 
 
 
@@ -10,29 +12,38 @@ class CardSearch extends Component {
         cardSearchResults:[],
         cardsWithPictures:[],
         searchResultPlaceholder:'Search for cards',
-        inputCardName:'',
+        nameInput:'',
+        // cardSearchVars:[            
+        //     {id:0, cardParam:'type', value:'', show:false},
+        //     {id:1, cardParam:'subtypes', value:'', show:false},
+        //     {id:2, cardParam:'set', value:'', show:false},
+        //     {id:3, cardParam:'colors', value:'', show:false},
+        //     {id:4, cardParam:'name', value:'', show:false},
+        // ],
+        resultsPage:'',
         status:null
     }
 
-    findCard = (searchName, searchSubtype, searchSet, searchColors, searchPage) => {
+    findCard = ({name, type, subtypes}) => {
+        if(!name && !type && !subtypes) {
+            this.setState({
+                searchResultPlaceholder:'Please try again!',
+            })
+            return;
+        }
         mtg.card
         .where({
-            name: searchName,
-            subtypes: searchSubtype,
-            set: searchSet,
-            colors: searchColors,
-            page: searchPage,
+            name: name,
+            type: type,
+            subtypes: subtypes,
+            // set: set,
+            // colors: colors,
+            page: 0,
         })
         .then(results => {
-            if(!searchName && !searchSubtype && !searchSet && !searchColors && !searchPage) {
-                this.setState({
-                    searchResultPlaceholder:'Please try again!',
-                })
-                return;
-            }
             if(results.length === 0) {
                 this.setState({
-                    inputCardName:'',
+                    nameInput:'',
                     searchResultPlaceholder:'No results!'
                 })
             }
@@ -44,7 +55,7 @@ class CardSearch extends Component {
             else {
                 this.setState({
                     cardSearchResults:results,
-                    inputCardName:''
+                    nameInput:''
                 })
                 this.removeCardsWithNoPics();
             }
@@ -52,7 +63,7 @@ class CardSearch extends Component {
         .catch(error => {
             this.setState({
                 searchResultPlaceholder:'Error fetching results!',
-                inputCardName:''
+                nameInput:''
             })
             console.log(error)
         })
@@ -69,38 +80,23 @@ class CardSearch extends Component {
         })
     }
 
-    
-    handleChanges = event => {
-        this.setState({
-            [event.target.name]:event.target.value
-        })
-    }
 
-    submitSearch = event => {
+    submitSearch = (event, searchParams) => {
         event.preventDefault();
         this.setState({
-            searchResultPlaceholder:"Searching..."
+            searchResultPlaceholder:'Searching...'
         })
-        this.findCard(this.state.inputCardName);
+        this.findCard(searchParams);
     }
+
 
     render() {
         return (
             <>  
-                <section className="search-form">
-                    <form 
-                        onSubmit={this.submitSearch}
-                    >
-                        <input 
-                            type="text"
-                            name="inputCardName"
-                            placeholder="Input card name here"
-                            onChange={this.handleChanges}
-                            value={this.state.inputCardName}
-                        />
-                        <button className="btn-dark" onClick={this.submitSearch}>Search</button>
-                    </form>
-                </section>
+                <SearchForm 
+                    submitSearch={this.submitSearch}
+                    sortingHat={this.props.sortingHat}
+                />
 
                 <section className="cards-container">
 

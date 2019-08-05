@@ -175,6 +175,7 @@ class App extends Component {
             <CardSearch 
               statusCheck={this.statusCheck}
               status={this.state.status}
+              sortingHat={sortingHat}
             />
           )}
         />

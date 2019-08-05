@@ -2,10 +2,16 @@
     form {
         width: 90%;
         max-width: 500px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         input {
             background-color: $black;
             color: $white;
-            width: 100%;
+            max-width: 90%;
+        }
+        button {
+            margin: 0;
         }
     }
 }

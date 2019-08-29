@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import mtg from 'mtgsdk';
 
 import Home from './Navigation/Home.jsx';
 import NavBar from './Navigation/NavBar.jsx';
@@ -50,13 +51,15 @@ class App extends Component {
     randomCardImage:'',
     getAllTheSets: `https://api.magicthegathering.io/v1/sets`,
     allTheSets: null,
-    allCards:null,
+    allCards: null,
+    allTheTypes:'',
     status:null
   }
 
   componentDidMount() {
     this.getCard(this.state.randomCardImageUrl);
     this.clearStatus()
+    this.getAllTheTypes()
   }
 
   getCard = URL => {
@@ -125,6 +128,25 @@ class App extends Component {
   };
 
 
+  getAllTheTypes = () => {
+    if (this.state.allTheTypes.length === 0) {
+      try {
+        mtg.type.all()
+        .on('data', results => {
+          this.setState({
+            allTheTypes:[
+              ...this.state.allTheTypes,
+              results
+            ]
+          })
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    return;
+  }
+
   statusCheck = status => {
     this.setState({
         status:status
@@ -133,6 +155,7 @@ class App extends Component {
 
 
   render() {
+
     return (
       <BrowserRouter>
         <NavBar />
@@ -175,6 +198,8 @@ class App extends Component {
             <CardSearch 
               statusCheck={this.statusCheck}
               status={this.state.status}
+              sortingHat={sortingHat}
+              allTheTypes={this.state.allTheTypes}
             />
           )}
         />

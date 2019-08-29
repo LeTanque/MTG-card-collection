@@ -1,15 +1,14 @@
 import React, { Fragment } from 'react'
-import Card from './Card.jsx';
-import CardStatus from './CardStatus.jsx';
 import Loader from 'react-loader-spinner';
 
+import Card from './Card.jsx';
+import CardStatus from './CardStatus.jsx';
 
 
 class Pack extends React.Component {
     state = {
         status:null
     }
-
 
 
     render() {

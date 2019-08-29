@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "@saeris/react-keyrune": "^1.0.8",
+    "@saeris/react-mana": "^1.0.3",
     "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "firebase": "^6.2.0",
     "keyrune": "^3.4.2",
+    "mana-font": "^1.4.1",
     "mtgsdk": "^0.4.3",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",

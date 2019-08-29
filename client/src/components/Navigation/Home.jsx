@@ -15,10 +15,6 @@ class Home extends Component {
     }
     
     componentDidUpdate(prevProps, prevState) {
-        // console.log("previous Props", prevProps)
-        // console.log("Props", this.props)
-        // console.log("previous State", prevState)
-        // console.log("State", this.state)
         if(prevProps !== this.props || this.state.visited === true){
             let bgMovement = document.querySelector('.home');
             if (bgMovement) {

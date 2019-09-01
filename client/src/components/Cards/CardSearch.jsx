@@ -68,7 +68,7 @@ class CardSearch extends Component {
         let cardOrCards = 'card';
         if (cardsWithPictures.length > 1) { cardOrCards='cards' };
         this.setState({
-            cardsWithPictures:cardsWithPictures,
+            cardsWithPictures,
             searchResultPlaceholder:`Found ${this.state.cardSearchResults.length} cards, displaying ${cardsWithPictures.length} ${cardOrCards}.`,
         })
     }

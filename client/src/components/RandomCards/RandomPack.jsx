@@ -12,12 +12,6 @@ const RandomPack = props => {
                     <div className="nav-icon">
                         <div>
                             <button
-                                onClick={() => props.getPackOfCards("m20")}
-                                className="btn-red"
-                            >
-                                Core 2020
-                            </button>
-                            <button
                                 onClick={() => props.getPackOfCards("war")}
                                 className="btn-red"
                             >
@@ -59,13 +53,85 @@ const RandomPack = props => {
                             >
                                 Amonket
                             </button>
+                            <button
+                                onClick={() => props.getPackOfCards("aer")}
+                                className="btn-red"
+                            >
+                                Aether Revolt
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("emn")}
+                                className="btn-red"
+                            >
+                                Eldritch Moon
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("soi")}
+                                className="btn-red"
+                            >
+                                Shadows over Innistrad
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("ogw")}
+                                className="btn-red"
+                            >
+                                Oath of the Gatewatch
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("bfz")}
+                                className="btn-red"
+                            >
+                                Battle for Zendikar
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("dtk")}
+                                className="btn-red"
+                            >
+                                Dragons of Tarkir
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("frf")}
+                                className="btn-red"
+                            >
+                                Fate Reforged
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("ktk")}
+                                className="btn-red"
+                            >
+                                Khans of Tarkir
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("jou")}
+                                className="btn-red"
+                            >
+                                Journey into Nyx
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("bng")}
+                                className="btn-red"
+                            >
+                                Born of the Gods
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("ths")}
+                                className="btn-red"
+                            >
+                                Theros
+                            </button>
+                            <button
+                                onClick={() => props.getPackOfCards("dgm")}
+                                className="btn-red"
+                            >
+                                Dragon's Maze
+                            </button>
                             
                         </div>
                     </div>
                 </div>
             </section>
             <Pack 
-                allCards={props.allCards}
+                packOfCards={props.packOfCards}
                 statusCheck={props.statusCheck}
             />
             <CardStatus 

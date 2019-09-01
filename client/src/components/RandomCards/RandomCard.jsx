@@ -5,7 +5,6 @@ import React from 'react'
 
 const RandomCard = props => {
     const card = props.randomCard
-    // console.log(card)
 
     if (!card.imageUrl) {
         return (

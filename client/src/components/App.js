@@ -45,15 +45,22 @@ function sortingHat(key, order='asc') {
 
 class App extends Component {
   state = {
-    cardsPageNumber:`1`,
     location:`rna`,
     randomCardImageUrl:`https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${getRandomNumber(1, 1000)}&type=card`,
     randomCardImage:'',
     getAllTheSets: `https://api.magicthegathering.io/v1/sets`,
     allTheSets: null,
-    allCards: null,
+    packOfCards: null,
     allTheTypes:'',
-    status:null
+    status:null,
+
+    cardSearchResults:[],
+    cardsWithPictures:[],
+    searchResultPlaceholder:'Search for cards',
+    currentSearch: {
+      name:''
+    }
+
   }
 
   componentDidMount() {
@@ -79,9 +86,10 @@ class App extends Component {
   // This method retrieves a random pack of cards
   getPackOfCards = setId => {
     this.setState({
-      allCards:null,
+      packOfCards:null,
       status:"Opening pack..."
     })
+
     // At a high level we are calling an API to fetch some mtg card data.
     // We then take that data and set it to our state.
     const URL = `https://api.magicthegathering.io/v1/sets/${setId}/booster`;
@@ -91,7 +99,7 @@ class App extends Component {
     })
     .then(data => {
       this.setState({
-        allCards:null,
+        packOfCards:null,
         status:`${data.cards.length} cards in pack`
       })
       this.checkPackOfCards(data.cards)
@@ -103,7 +111,7 @@ class App extends Component {
     if(rawPackOfCards) {
       const cardsWithImage = rawPackOfCards.filter(card => card.imageUrl);
       this.setState({ 
-        allCards:cardsWithImage
+        packOfCards:cardsWithImage
       });
     } else {
       this.setState({
@@ -154,6 +162,74 @@ class App extends Component {
   }
 
 
+
+  findCard = ({ name, type, subtypes, set, colors, page }) => {
+      if(!name && !type && !subtypes && !set && !colors) {
+          return this.setState({
+              searchResultPlaceholder:'Please try again!',
+          });
+      }
+
+      mtg.card
+      .where({
+          name: name,
+          type: type,
+          subtypes: subtypes,
+          set: set,
+          colors: colors,
+          page: page,
+      })
+      .then(results => {
+          if(results.length === 0) {
+              this.setState({
+                  searchResultPlaceholder:'No results!'
+              })
+          }
+          if(results === null) {
+              this.setState({
+                  searchResultPlaceholder:'Searching...'
+              })
+          }
+          else {
+            console.log("App name", name, '\n', this.state.currentSearch.name)
+              this.setState({
+                  cardSearchResults: results,
+                  currentSearch: {
+                    ...this.state.currentSearch,
+                    name
+                  }
+              })
+              this.removeCardsWithNoPics();
+          }
+      })
+      .catch(error => {
+          this.setState({
+              searchResultPlaceholder:'Error fetching results!'
+          })
+          console.log(error)
+      })
+  }
+
+
+  removeCardsWithNoPics = () => {
+      const cardsWithPictures = this.state.cardSearchResults.filter(cardObject => cardObject.imageUrl)
+      let cardOrCards = 'card';
+      if (cardsWithPictures.length > 1) { cardOrCards='cards' };
+      this.setState({
+          cardsWithPictures,
+          searchResultPlaceholder:`Found ${this.state.cardSearchResults.length} cards, displaying ${cardsWithPictures.length} ${cardOrCards}.`,
+      })
+  }
+
+
+  submitSearch = (event, searchParams) => {
+      event.preventDefault();
+      this.setState({
+          searchResultPlaceholder:'Searching...'
+      })
+      this.findCard(searchParams);
+  }
+
   render() {
 
     return (
@@ -184,7 +260,7 @@ class App extends Component {
           path='/random-pack'
           render={() => (
             <RandomPack 
-              allCards={this.state.allCards} 
+              packOfCards={this.state.packOfCards} 
               getPackOfCards={this.getPackOfCards}
               status={this.state.status}
               statusCheck={this.statusCheck}
@@ -199,7 +275,11 @@ class App extends Component {
               statusCheck={this.statusCheck}
               status={this.state.status}
               sortingHat={sortingHat}
-              allTheTypes={this.state.allTheTypes}
+              submitSearch={this.submitSearch}
+              cardsWithPictures={this.state.cardsWithPictures}
+              searchResultPlaceholder={this.state.searchResultPlaceholder}
+              currentSearch={this.state.currentSearch}
+              // allTheTypes={this.state.allTheTypes}
             />
           )}
         />

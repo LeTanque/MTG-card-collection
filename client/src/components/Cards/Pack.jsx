@@ -6,30 +6,22 @@ import CardStatus from './CardStatus.jsx';
 
 
 class Pack extends React.Component {
-    state = {
-        status:null
-    }
-
 
     render() {
-        if(!this.props.allCards) {
+        if(!this.props.packOfCards) {
             return (
-                <>
-                    <section className="loader">
-                        Open a new pack!
-                    </section>
-                </>
+                <section className="loader">
+                    Open a new pack!
+                </section>
             )
         }
 
-        else if(this.props.allCards.length === 0) {
+        else if(this.props.packOfCards.length === 0) {
             return (
-                <>
-                    <section className="loader">
-                        <Loader  type="Grid" color="#ffffff" height={80} width={80} />
-                        <code>Loading...</code>
-                    </section>
-                </>
+                <section className="loader">
+                    <Loader  type="Grid" color="#ffffff" height={80} width={80} />
+                    <code>Loading...</code>
+                </section>
             )
         }
 
@@ -39,7 +31,7 @@ class Pack extends React.Component {
 
                     {this.props.status ? (<CardStatus status={this.props.status} />) : null}
 
-                    {this.props.allCards.map(eachCard => (
+                    {this.props.packOfCards.map(eachCard => (
                         <Fragment key={eachCard.id}>
                             <Card 
                                 card={eachCard}

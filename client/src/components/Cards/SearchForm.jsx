@@ -4,7 +4,7 @@ import React from 'react'
 
 class SearchForm extends React.Component {
     state = {
-        searchVarShow:[
+        searchOptionShow:[
             { id:0, searchOption:'type', optionValues:'', show:false },
             { id:1, searchOption:'subtypes', optionValues:'', show:false },
             { id:2, searchOption:'set', optionValues:'', show:false },
@@ -22,19 +22,18 @@ class SearchForm extends React.Component {
     }
 
 
-
     showMenu = (event, varObject) => {
         event.preventDefault();
-        const searchVarShowMinusTarget = this.state.searchVarShow.filter(element => element.searchOption !== varObject.searchOption)
-        searchVarShowMinusTarget.forEach(element => element.show = false);
+        const searchOptionShowMinusTarget = this.state.searchOptionShow.filter(element => element.searchOption !== varObject.searchOption)
+        searchOptionShowMinusTarget.forEach(element => element.show = false);
 
-        const newSearchVarShow = [
-            ...searchVarShowMinusTarget,
+        const newSearchOptionShow = [
+            ...searchOptionShowMinusTarget,
             { id:varObject.id, searchOption:varObject.searchOption, optionValues:'', show:true }
         ]
-        newSearchVarShow.sort(this.props.sortingHat('id', 'asc'));
+        newSearchOptionShow.sort(this.props.sortingHat('id', 'asc'));
         this.setState({
-            searchVarShow:newSearchVarShow
+            searchOptionShow: newSearchOptionShow
         })
     }
 
@@ -49,10 +48,23 @@ class SearchForm extends React.Component {
         })
     }
 
+
     submitInput = event => {
         event.preventDefault();
-        this.props.submitSearch(event, this.state.searchParams);
+        console.log(this.state.searchParams.name, this.props.currentSearch.name);
+        if(this.state.searchParams.name !== this.props.currentSearch.name) {
+            this.props.submitSearch(event, this.state.searchParams);
+        } else {
+            this.setState({
+                searchParams:{
+                    ...this.state.searchParams,
+                    page:1,
+                }
+            });
+            this.props.submitSearch(event, this.state.searchParams);
+        }
     }
+
 
     pagination = (event, direction) => {
         direction === "++" 
@@ -72,10 +84,9 @@ class SearchForm extends React.Component {
         })
         
         this.submitInput(event);
-
-        console.log(this.state.searchParams.page)
     }
     
+
     render() {
         return (
             <section className="search-form">
@@ -89,15 +100,15 @@ class SearchForm extends React.Component {
                         onChange={this.handleChanges}
                         value={this.state.searchParams.name}
                     />
-                    <button className="btn-dark" >Search</button>
+                    <button className="btn-dark">Search</button>
                 </form>
                 <div className="dropdown-group">
 
-                    {this.state.searchVarShow.map(variable => (
+                    {this.state.searchOptionShow.map(variable => (
                         <React.Fragment key={variable.id} >
                             <button 
                                 className='btn-dark btn-dropdown' 
-                                onClick={(e) => this.showMenu(e, variable)}
+                                onClick={(event) => this.showMenu(event, variable)}
                                 name={`${variable.searchOption}`}
                             >
                                 {variable.searchOption}
@@ -107,11 +118,11 @@ class SearchForm extends React.Component {
 
                 </div>
                 
-                {this.state.searchVarShow.map(obj => (
-                    <React.Fragment key={obj.id}>
-                        {obj.show ? (
+                {this.state.searchOptionShow.map(object => (
+                    <React.Fragment key={object.id}>
+                        {object.show ? (
                             <div className="dropdown">
-                                {obj.searchOption}
+                                {object.searchOption}
                             </div>
                         ) : (
                             <div className='display-none'></div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mana } from "@saeris/react-mana"
+// import { Mana } from "@saeris/react-mana"
 
 
 class SearchForm extends React.Component {
@@ -17,6 +17,7 @@ class SearchForm extends React.Component {
             subtypes:'',
             set:'',
             colors:'',
+            page:1
         }
     }
 
@@ -48,14 +49,34 @@ class SearchForm extends React.Component {
         })
     }
 
-    submitInput = (event) => {
+    submitInput = event => {
         event.preventDefault();
         this.props.submitSearch(event, this.state.searchParams);
     }
 
+    pagination = (event, direction) => {
+        direction === "++" 
+        ? 
+        this.setState({
+            searchParams:{
+                ...this.state.searchParams,
+                page: ++this.state.searchParams.page
+            }
+        })
+        : 
+        this.setState({
+            searchParams:{
+                ...this.state.searchParams,
+                page: --this.state.searchParams.page
+            }
+        })
+        
+        this.submitInput(event);
+
+        console.log(this.state.searchParams.page)
+    }
     
     render() {
-        console.log("this.state.type:  ",this.props.type)
         return (
             <section className="search-form">
                 <form 
@@ -97,6 +118,9 @@ class SearchForm extends React.Component {
                         )}
                     </React.Fragment>
                 ))}
+
+                <button onClick={(event)=>this.pagination(event, '--')}>last page</button>
+                <button onClick={(event)=>this.pagination(event, '++')}>next page</button>
 
             </section>
         );

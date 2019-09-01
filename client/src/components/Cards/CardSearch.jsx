@@ -17,21 +17,22 @@ class CardSearch extends Component {
         status:null
     }
 
-    findCard = ({name, type, subtypes}) => {
-        if(!name && !type && !subtypes) {
+    findCard = ({ name, type, subtypes, set, colors, page }) => {
+        if(!name && !type && !subtypes && !set && !colors) {
             this.setState({
                 searchResultPlaceholder:'Please try again!',
             })
             return;
         }
+
         mtg.card
         .where({
             name: name,
             type: type,
             subtypes: subtypes,
-            // set: set,
-            // colors: colors,
-            page: 0,
+            set: set,
+            colors: colors,
+            page: page,
         })
         .then(results => {
             if(results.length === 0) {
@@ -82,7 +83,6 @@ class CardSearch extends Component {
         this.findCard(searchParams);
     }
 
-
     render() {
         return (
             <>  
@@ -111,6 +111,7 @@ class CardSearch extends Component {
                             </Fragment>
                         )
                     })}
+
                 </section>
             </>
         );

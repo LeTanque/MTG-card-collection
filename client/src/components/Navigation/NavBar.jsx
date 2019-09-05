@@ -11,7 +11,6 @@ class NavBar extends Component {
                     <Link to={{pathname:"/"}}>
                         <h2 className="nav-logo">Magical</h2>
                     </Link>
-
                     <nav>
                         <NavLink to={"/card-search"}>
                             <span>Search</span>
@@ -22,6 +21,13 @@ class NavBar extends Component {
                         <NavLink to={"/collection"}>
                             <span>Collection</span>
                         </NavLink>
+                        {/* <NavLink to={"/auth/profile"}> */}
+                        <NavLink to={"/magical"}>
+                            <span><code>MAGICAL</code></span>
+                        </NavLink>
+                        <NavLink to={"/auth/login"}>
+                            <span><code className="cred">LOG-IN</code></span>
+                        </NavLink>
                         <Keyrune 
                             gradient fixed 
                             set="ugl" 
@@ -30,6 +36,7 @@ class NavBar extends Component {
                         />
                     </nav>
                 </section>
+                <div className="fa-sm nav-token">{localStorage.getItem('token')}</div>
             </>
         );
     }

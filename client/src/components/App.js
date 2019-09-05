@@ -11,6 +11,13 @@ import AdminTools from './Admin/AdminTools.jsx';
 import Collection from './Collection/Collection.jsx';
 
 
+import PrivateRoute from './auth/PrivateRoute.jsx';
+import Login from './auth/Login.jsx';
+import Magical from './protected/Magical.jsx';
+// import Decks from './protected/Users/Decks.jsx';
+// import Authentication from './auth/Authentication.jsx';
+
+
 // Returns random numbers in a safe range for rendering cards
 function getRandomNumber(min, max) {
   const random = Math.random() * (max - min) + min;
@@ -279,7 +286,6 @@ class App extends Component {
               cardsWithPictures={this.state.cardsWithPictures}
               searchResultPlaceholder={this.state.searchResultPlaceholder}
               currentSearch={this.state.currentSearch}
-              // allTheTypes={this.state.allTheTypes}
             />
           )}
         />
@@ -304,7 +310,23 @@ class App extends Component {
           )}
         />
 
+        <Route 
+          exact
+          path='/auth/login' 
+          component={Login} 
+        />
 
+        <PrivateRoute 
+          exact 
+          path='/magical' 
+          component={Magical}
+        />
+
+        {/* <PrivateRoute 
+          exact 
+          path='/decks' 
+          component={Decks}
+        /> */}
 
 
       </BrowserRouter>

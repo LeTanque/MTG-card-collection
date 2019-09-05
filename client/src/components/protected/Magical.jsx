@@ -11,7 +11,7 @@ import {
     getDecks
 } from '../state/actions/index.js';
 
-// import Profile from "./Users/Profile.jsx";
+import Decks from "./Users/Decks.jsx";
 
 
 
@@ -60,11 +60,12 @@ class Magical extends Component {
                         >Logout <FaUnlock /></button>
                     </div>
 
-                    <hr></hr>
                     
+                    <h5>{this.props.users.users ? "Users" : null}</h5>
+
                     {this.props.users.users ? this.props.users.users.map(user => (
                         <React.Fragment key={user.id}>
-                            <p>{user.username}</p>
+                            <p>{user.username} {user.id}</p>
                         </React.Fragment>
                     )) : null}
                     
@@ -74,11 +75,12 @@ class Magical extends Component {
                     <br></br>
 
                     {this.props.decks ? this.props.decks.map(deck => (
-                        <React.Fragment key={deck.id}>
-                            <h3>{deck.name}</h3>
-                            <p>{deck.description}</p>
-                        </React.Fragment>
-                    )) : null} 
+
+                        <Decks deck={deck} key={deck.id} />
+
+                    )) : 
+                        null
+                    } 
 
                 </section>
             </Fragment>

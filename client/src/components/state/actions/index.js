@@ -10,17 +10,21 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 // export const LOGIN_REFRESH_SUCCESS = 'LOGIN_REFRESH_SUCCESS';
 // export const LOGIN_REFRESH_FAILURE = 'LOGIN_REFRESH_FAILURE';
 
-// export const FETCH_CARDS_SUCCESS = 'FETCH_CARDS_SUCCESS';
 // export const FETCH_CARDS_START = 'FETCH_CARDS_START';
+// export const FETCH_CARDS_SUCCESS = 'FETCH_CARDS_SUCCESS';
 // export const FETCH_CARDS_FAILURE = 'FETCH_CARDS_FAILURE';
 
-export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_START = 'FETCH_USERS_START';
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 
-export const FETCH_DECKS_SUCCESS = 'FETCH_DECKS_SUCCESS';
 export const FETCH_DECKS_START = 'FETCH_DECKS_START';
+export const FETCH_DECKS_SUCCESS = 'FETCH_DECKS_SUCCESS';
 export const FETCH_DECKS_FAILURE = 'FETCH_DECKS_FAILURE';
+
+export const ADD_DECK_START = 'ADD_DECK_START';
+export const ADD_DECK_SUCCESS = 'ADD_DECK_SUCCESS';
+export const ADD_DECK_FAILURE = 'ADD_DECK_FAILURE';
 
 
 export const userLogin = credentials => dispatch => {
@@ -96,6 +100,34 @@ export const getDecks = () => dispatch => {
         .catch(error => {
             dispatch({
                 type: FETCH_DECKS_FAILURE,
+                payload: error.message,
+            })
+        })
+}
+
+export const addDeck = deckObject => dispatch => {
+    dispatch({
+        type: ADD_DECK_START
+    })
+    console.log("addDeck in actions ---> ", deckObject);
+    axios
+        .post(
+            "http://localhost:3333/v1/decks", {
+                body: deckObject,
+                headers: { 
+                    authorization: localStorage.getItem('token') 
+                }
+            }
+        )
+        .then(response => {
+            dispatch({
+                type: ADD_DECK_SUCCESS,
+                payload: response.data,
+            })
+        })
+        .catch(error => {
+            dispatch({
+                type: ADD_DECK_FAILURE,
                 payload: error.message,
             })
         })

@@ -100,7 +100,7 @@ button:active::after {
   text-decoration: none;
   cursor: pointer;
   &:hover {
-    background-color: $btn-bg-color/2;
+    background-color: scale-color($btn-bg-color, $lightness: -30%);
     color: $btn-color;
     @include transition(0.75s);
   }
@@ -120,7 +120,7 @@ button:active::after {
   background-color: $green;
   color: $white;
   &:hover {
-    background-color: $green/2;
+    background-color: scale-color($green, $lightness: -30%);
     transition-duration: 0.5s;
   }
 }
@@ -128,7 +128,7 @@ button:active::after {
   background-color: $dark-red;
   color: $white;
   &:hover {
-    background-color: $dark-red/2;
+    background-color: scale-color($dark-red, $lightness: -30%);
     transition-duration: 0.5s;
   }
 }
@@ -144,7 +144,7 @@ button:active::after {
   background-color: $primary;
   color: $white;
   &:hover {
-    background-color: $primary/2;
+    background-color: scale-color($primary, $lightness: -30%);
     transition-duration: 0.5s;
   }
 }
@@ -152,7 +152,7 @@ button:active::after {
   background-color: $dark;
   color: $white;
   &:hover {
-    background-color: $dark * 2;
+    background-color: scale-color($dark, $lightness: 30%);
     transition-duration: 0.5s;
   }
 }

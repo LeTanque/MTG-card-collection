@@ -14,7 +14,8 @@ import Collection from './Collection/Collection.jsx';
 import PrivateRoute from './auth/PrivateRoute.jsx';
 import Login from './auth/Login.jsx';
 import Magical from './protected/Magical.jsx';
-// import Decks from './protected/Users/Decks.jsx';
+import Decks from './protected/Users/Decks.jsx';
+import AddDeck from "./protected/Users/AddDeck.jsx";
 // import Authentication from './auth/Authentication.jsx';
 
 
@@ -52,20 +53,20 @@ function sortingHat(key, order='asc') {
 
 class App extends Component {
   state = {
-    location:`rna`,
-    randomCardImageUrl:`https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${getRandomNumber(1, 1000)}&type=card`,
-    randomCardImage:'',
+    location: `rna`,
+    randomCardImageUrl: `https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${getRandomNumber(1, 1000)}&type=card`,
+    randomCardImage: '',
     getAllTheSets: `https://api.magicthegathering.io/v1/sets`,
     allTheSets: null,
     packOfCards: null,
-    allTheTypes:'',
-    status:null,
+    allTheTypes: '',
+    status: null,
 
-    cardSearchResults:[],
-    cardsWithPictures:[],
-    searchResultPlaceholder:'Search for cards',
+    cardSearchResults: [],
+    cardsWithPictures: [],
+    searchResultPlaceholder: 'Search for cards',
     currentSearch: {
-      name:''
+      name: '',
     }
 
   }
@@ -198,7 +199,7 @@ class App extends Component {
               })
           }
           else {
-            console.log("App name", name, '\n', this.state.currentSearch.name)
+            // console.log("App name", name, '\n', this.state.currentSearch.name)
               this.setState({
                   cardSearchResults: results,
                   currentSearch: {
@@ -213,7 +214,7 @@ class App extends Component {
           this.setState({
               searchResultPlaceholder:'Error fetching results!'
           })
-          console.log(error)
+          console.log(error);
       })
   }
 
@@ -320,6 +321,22 @@ class App extends Component {
           exact 
           path='/magical' 
           component={Magical}
+        />
+
+        <Route 
+          exact 
+          path='/magical/decks' 
+          render={(props) => (
+            <Decks {...props} />
+          )}
+        />
+
+        <Route 
+          exact 
+          path='/magical/decks/add' 
+          render={() => (
+            <AddDeck  />
+          )}
         />
 
         {/* <PrivateRoute 

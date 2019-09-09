@@ -4,32 +4,13 @@ import Loader from 'react-loader-spinner';
 
 
 
-
-
 class Home extends Component {
-    state = {
-        bgSize:"",
-        cursorX:"",
-        cursorY:"",
-        visited: false
-    }
-    
-    componentDidUpdate(prevProps, prevState) {
-        if(prevProps !== this.props || this.state.visited === true){
-            let bgMovement = document.querySelector('.home');
-            if (bgMovement) {
-                bgMovement.addEventListener('mousemove', event => {
-                    bgMovement.style.backgroundPositionX= `${-event.offsetX}px`;
-                    bgMovement.style.backgroundPositionY= `${-event.offsetY}px`;
-                })
-            }
-        }
-    }
 
-    componentDidMount() {
-        this.setState({
-            visited: true
-        })
+    bgCardMovement = event => {
+        const adjust = 3.5;
+        let bgMovement = document.querySelector('.home');
+        bgMovement.style.backgroundPositionX= `${-event.pageX / adjust}px`;
+        bgMovement.style.backgroundPositionY= `${-event.pageY / adjust}px`;
     }
     
     render() {
@@ -37,8 +18,6 @@ class Home extends Component {
             WebkitTransition: 'all', // note the capital 'W' here
             msTransition: 'all', // 'ms' is the only lowercase vendor prefix
             backgroundImage: 'url(' + this.props.randomCardImage + ')',
-            // backgroundSize: `${this.state.bgSize}%`,
-            // backgroundPositionX: `${this.state.cursorX}px`,
         };
 
         if (!this.props.randomCardImage) {
@@ -55,11 +34,13 @@ class Home extends Component {
         else {
             return (
                 <>
+                
                     <section className="home-container"  >
 
                         <div 
                             className="home" 
                             style={bgCard}
+                            onMouseMove={(event) => this.bgCardMovement(event)}
                         >
                         </div>
                         

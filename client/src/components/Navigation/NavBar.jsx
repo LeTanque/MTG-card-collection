@@ -36,7 +36,7 @@ class NavBar extends Component {
                         />
                     </nav>
                 </section>
-                <div className="fa-sm nav-token">{localStorage.getItem('token')}</div>
+                {/* <div className="fa-sm nav-token">{localStorage.getItem('token')}</div> */}
             </>
         );
     }

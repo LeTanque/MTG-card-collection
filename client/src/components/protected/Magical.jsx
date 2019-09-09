@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import {Redirect} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import {  FaUnlock } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
@@ -11,7 +11,7 @@ import {
     getDecks
 } from '../state/actions/index.js';
 
-import Decks from "./Users/Decks.jsx";
+// import Decks from "./Users/Decks.jsx";
 
 
 
@@ -74,13 +74,9 @@ class Magical extends Component {
                     <div className='profile-header'>Decks &nbsp; : </div>
                     <br></br>
 
-                    {this.props.decks ? this.props.decks.map(deck => (
-
-                        <Decks deck={deck} key={deck.id} />
-
-                    )) : 
-                        null
-                    } 
+                    <Link to={"/magical/decks"} >
+                        <h2>Decks </h2>
+                    </Link>
 
                 </section>
             </Fragment>

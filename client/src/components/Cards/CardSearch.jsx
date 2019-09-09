@@ -14,8 +14,6 @@ class CardSearch extends Component {
         status:null
     }
 
-
-
     render() {
         return (
             <>  

@@ -129,9 +129,10 @@ class SearchForm extends React.Component {
                         )}
                     </React.Fragment>
                 ))}
-
-                <button onClick={(event)=>this.pagination(event, '--')}>last page</button>
-                <button onClick={(event)=>this.pagination(event, '++')}>next page</button>
+                <div className="search__pagination">
+                    <button onClick={(event)=>this.pagination(event, '--')}>last page</button>
+                    <button onClick={(event)=>this.pagination(event, '++')}>next page</button>
+                </div>
 
             </section>
         );

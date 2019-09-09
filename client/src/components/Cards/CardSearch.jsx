@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 // import mtg from 'mtgsdk';
+// import Loader from 'react-loader-spinner';
 
 import Card from './Card.jsx';
 import CardStatus from './CardStatus.jsx';
@@ -9,12 +10,22 @@ import SearchForm from './SearchForm.jsx';
 
 class CardSearch extends Component {
     state = {
-        nameInput:'',
-        resultsPage:'',
-        status:null
+        nameInput: '',
+        resultsPage: '',
+        status: null
     }
 
+    
     render() {
+
+        // if (this.props.searchResultPlaceholder === "Searching...") {
+        //     return (
+        //         <section className="loader">
+        //             <Loader  type="Grid" color="#ffffff" height={80} width={80} />
+        //             <code>Loading...</code>
+        //         </section>
+        //     )
+        // }
         return (
             <>  
                 <SearchForm 

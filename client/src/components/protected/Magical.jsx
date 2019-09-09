@@ -8,7 +8,7 @@ import {
     userLogin, 
     getUsers, 
     logoutUser,
-    getDecks
+    // getDecks
 } from '../state/actions/index.js';
 
 // import Decks from "./Users/Decks.jsx";
@@ -20,7 +20,7 @@ class Magical extends Component {
     
     componentDidMount() {
         this.props.getUsers();
-        this.props.getDecks();
+        // this.props.getDecks();
     }
 
     logout = () => {
@@ -71,7 +71,7 @@ class Magical extends Component {
                     
                     <hr></hr>
 
-                    <div className='profile-header'>Decks &nbsp; : </div>
+                    {/* <div className='profile-header'>Decks &nbsp; : </div> */}
                     <br></br>
 
                     <Link to={"/magical/decks"} >
@@ -101,6 +101,6 @@ export default connect(
         userLogin,
         getUsers, 
         logoutUser, 
-        getDecks
+        // getDecks
     }
 )(Magical)

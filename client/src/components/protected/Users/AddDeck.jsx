@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import { Link } from "react-router-dom";
 
 import { 
-    getDecks,
+    // getDecks,
     addDeck
 } from '../../state/actions/index.js';
 
@@ -26,11 +26,13 @@ class AddDeck extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.props.addDeck(this.state);
+        this.props.history.push("/magical")
     }
 
     render() {
-        console.log("state in addDeck --> ", this.state)
-        console.log("props in addDeck --> ", this.props)
+        // console.log("state in addDeck --> ", this.state)
+        // console.log("props in addDeck --> ", this.props)
+        // console.log("this in addDeck --> ", this)
         return (
             <>
                 <h3>AddDeck</h3>
@@ -56,8 +58,8 @@ class AddDeck extends Component {
                         onChange={this.handleChanges}
                         value={this.state.imageUrl}
                     />
+                    <button onClick={this.handleSubmit}>Add Deck</button>
                 </form>
-                <button onClick={this.handleSubmit}>Add Deck</button>
             </>
         );
     }
@@ -65,15 +67,15 @@ class AddDeck extends Component {
 
 
 const mapStateToProps = state => ({
-    fetching: state.decksReducer.fetching,
-    decks: state.decksReducer.decks,
-    error: state.decksReducer.error,
+    // fetching: state.decksReducer.fetching,
+    // decks: state.decksReducer.decks,
+    // error: state.decksReducer.error,
 })
 
 export default connect(
     mapStateToProps,
     { 
-        getDecks,
+        // getDecks,
         addDeck
     }
 )(AddDeck)

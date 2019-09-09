@@ -51,14 +51,15 @@ class SearchForm extends React.Component {
 
     submitInput = event => {
         event.preventDefault();
-        console.log(this.state.searchParams.name, this.props.currentSearch.name);
+        // console.log("State search params --> ", this.state.searchParams.name);
+        // console.log("props current search -->", this.props.currentSearch.name);
+
         if(this.state.searchParams.name !== this.props.currentSearch.name) {
             this.props.submitSearch(event, this.state.searchParams);
         } else {
             this.setState({
                 searchParams:{
                     ...this.state.searchParams,
-                    page:1,
                 }
             });
             this.props.submitSearch(event, this.state.searchParams);
@@ -88,6 +89,8 @@ class SearchForm extends React.Component {
     
 
     render() {
+        // console.log("props in search form --->", this.props);
+        // console.log("state in search form --->", this.state);
         return (
             <section className="search-form">
                 <form 

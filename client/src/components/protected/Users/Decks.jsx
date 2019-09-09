@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import Loader from 'react-loader-spinner';
 
 import Deck from "./Deck.jsx";
-
 
 import { 
     getDecks
@@ -17,6 +17,14 @@ class Decks extends React.Component {
     }
 
     render() {
+        if (this.props.decks.length < 1 || !this.props.decks) {
+            return (
+                <section className="loader">
+                    <Loader  type="Grid" color="#ffffff" height={80} width={80} />
+                    <code>Loading...</code>
+                </section>
+            )
+        }
         return (
             <>
                 <h3>These are the decks</h3>

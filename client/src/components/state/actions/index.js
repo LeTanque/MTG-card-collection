@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { axiosWithAuth } from "../../auth/axiosWithAuth.js";
 
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -109,16 +110,12 @@ export const addDeck = deckObject => dispatch => {
     dispatch({
         type: ADD_DECK_START
     })
-    console.log("addDeck in actions ---> ", deckObject);
-    axios
-        .post(
-            "http://localhost:3333/v1/decks", {
-                body: deckObject,
-                headers: { 
-                    authorization: localStorage.getItem('token') 
-                }
-            }
-        )
+    axios({
+        method: 'post',
+        url: 'http://localhost:3333/v1/decks',
+        data: deckObject,
+        headers: { Authorization: localStorage.getItem('token') }
+    })
         .then(response => {
             dispatch({
                 type: ADD_DECK_SUCCESS,

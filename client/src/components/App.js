@@ -73,12 +73,12 @@ class App extends Component {
 
   componentDidMount() {
     this.getCard(this.state.randomCardImageUrl);
-    this.clearStatus()
-    this.getAllTheTypes()
+    this.clearStatus();
+    this.getAllTheTypes();
   }
 
   getCard = URL => {
-    this.setState({ randomCardImage:URL })
+    this.setState({ randomCardImage:URL });
   }
 
   clearStatus = () => {
@@ -95,7 +95,8 @@ class App extends Component {
   getPackOfCards = setId => {
     this.setState({
       packOfCards:null,
-      status:"Opening pack..."
+      status:"Opening pack...",
+      searchResultPlaceholder:'Searching...'
     })
 
     // At a high level we are calling an API to fetch some mtg card data.
@@ -108,7 +109,8 @@ class App extends Component {
     .then(data => {
       this.setState({
         packOfCards:null,
-        status:`${data.cards.length} cards in pack`
+        status:`${data.cards.length} cards in pack`,
+        searchResultPlaceholder: ''
       })
       this.checkPackOfCards(data.cards)
     })
@@ -199,7 +201,6 @@ class App extends Component {
               })
           }
           else {
-            // console.log("App name", name, '\n', this.state.currentSearch.name)
               this.setState({
                   cardSearchResults: results,
                   currentSearch: {
@@ -233,7 +234,7 @@ class App extends Component {
   submitSearch = (event, searchParams) => {
       event.preventDefault();
       this.setState({
-          searchResultPlaceholder:'Searching...'
+          searchResultPlaceholder: 'Searching...'
       })
       this.findCard(searchParams);
   }
@@ -272,6 +273,7 @@ class App extends Component {
               getPackOfCards={this.getPackOfCards}
               status={this.state.status}
               statusCheck={this.statusCheck}
+              searchResultPlaceholder={this.state.searchResultPlaceholder}
             />
           )}
         />
@@ -334,8 +336,8 @@ class App extends Component {
         <Route 
           exact 
           path='/magical/decks/add' 
-          render={() => (
-            <AddDeck  />
+          render={props => (
+            <AddDeck  {...props} />
           )}
         />
 

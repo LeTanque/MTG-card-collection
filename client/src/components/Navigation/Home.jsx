@@ -7,7 +7,7 @@ import Loader from 'react-loader-spinner';
 class Home extends Component {
 
     bgCardMovement = event => {
-        const adjust = 3.5;
+        const adjust = 6;
         let bgMovement = document.querySelector('.home');
         bgMovement.style.backgroundPositionX= `${-event.pageX / adjust}px`;
         bgMovement.style.backgroundPositionY= `${-event.pageY / adjust}px`;

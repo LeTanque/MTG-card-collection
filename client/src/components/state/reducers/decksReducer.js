@@ -44,7 +44,7 @@ export const decksReducer = (state=initialState, action) => {
             return {
                 ...state,
                 addingDeck: false,
-                decks: action.payload,
+                decks: action.payload.deck,
                 error: null,
             }
         case ADD_DECK_FAILURE:

@@ -29,8 +29,7 @@ https://github.com/MagicTheGathering/mtg-sdk-javascript
 
 
 # Notes
-Had a problem with the keyrune and react-keyrune modules. What's weird is that everything was working fine then I shut down the server, brought it back up, all of a sudden react-keyrune was looking for a variable in keyrune that wasn't there. Had to go in and change mtg_setlist to keyrune_set, or something like that. 
-
+Had a problem with the keyrune and react-keyrune modules. react-keyrune was referencing a resource from keyrune that had changed location. I created a fix to the package, pushed it, created a PR, and it was accepted by the react-keyrune team. 
 
 
 
